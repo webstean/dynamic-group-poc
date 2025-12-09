@@ -10,12 +10,6 @@ on:
     paths:
       - 'terraform/**.tf'
       - '.github/workflows/**.yml'
-  pull_request:
-    branches:
-    - main
-    paths:
-      - 'terraform/**.tf'
-      - '.github/workflows/**.yml'
 
 permissions:
   id-token: write
