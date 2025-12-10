@@ -3,7 +3,7 @@ terraform {
   required_version = "~>1.0, < 2.0"
 
   required_providers {
-    azurearm = {
+    azurerm = {
       ## Azure Resource Manager
       source  = "hashicorp/azurerm"
       version = "~>4.0, < 5.0"
