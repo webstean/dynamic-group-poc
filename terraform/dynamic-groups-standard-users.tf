@@ -139,7 +139,7 @@ RULE
 }
 
 resource "azuread_group" "all_users" {
-  display_name = "All-Users-${title(var.org_fullname)}"
+  display_name = "All-Users"
   description  = "All Users including guests"
   owners = [
     data.azuread_client_config.current.object_id,
