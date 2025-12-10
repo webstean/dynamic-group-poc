@@ -34,9 +34,6 @@ terraform {
 
 provider "azurerm" {
   features {}
-}
-
-provider "azurerm" {
   use_aks_workload_identity = false
   use_msi                   = false
   # Authentication strategy: Using OIDC (GitHub Actions) and Azure CLI (interactive) for authentication to Azure AD tenant.
@@ -45,6 +42,7 @@ provider "azurerm" {
 }
 
 provider "azuread" {
+  features {}
   use_aks_workload_identity = false
   use_msi                   = false
   # Authentication strategy: Using OIDC (GitHub Actions) and Azure CLI (interactive) for authentication to Azure AD tenant.
@@ -53,6 +51,7 @@ provider "azuread" {
 }
 
 provider "msgraph" {
+  features {}
   use_aks_workload_identity = false
   use_msi                   = false
   # Authentication strategy: Using OIDC (GitHub Actions) and Azure CLI (interactive) for authentication to Azure AD tenant.
