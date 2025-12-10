@@ -96,3 +96,20 @@ resource "azuread_group" "exta7_dynamic_groups" {
     rule = "((user.userType -eq \"Member\") and (user.extensionAttribute7 -eq \"${each.value}\"))"
   }
 }
+
+output list_extension_attribute5 {
+  description = "List of unique Entra ID extension attributes 5 in tenancy"
+  sensitive = false
+  value = local.unique_extension_attribute5_set
+}
+output list_extension_attribute6 {
+  description = "List of unique Entra ID extension attributes 6 in tenancy"
+  sensitive = false
+  value = local.unique_extension_attribute6_set
+}
+output list_extension_attribute7 {
+  description = "List of unique Entra ID extension attributes 7 in tenancy"
+  sensitive = false
+  value = local.unique_extension_attribute7_set
+}
+
