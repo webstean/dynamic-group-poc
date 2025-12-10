@@ -43,7 +43,7 @@ locals {
 resource "azuread_group" "exta5_dynamic_groups" {
   for_each = local.unique_extension_attribute5_set
 
-  display_name     = "Dyn-Group-${each.value}-Members
+  display_name     = "Dyn-Group-${each.value}-Members"
   description      = "Dynamic group for members with extensionAttribute5 == '${each.value}'"
   security_enabled = true
   mail_enabled     = false
