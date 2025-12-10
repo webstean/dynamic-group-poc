@@ -4,12 +4,10 @@ data "azurerm_subscription" "current" {}
 data "azurerm_subscriptions" "available" {}
 ## azuread
 data "azuread_client_config" "current" {}
-## azapi
-data "azapi_client_config" "current" {}
 
 
 #data "azuread_user" "andreww" {
-#  user_principal_name = ""
+#  user_principal_name = var.upn
 #}
 
 data "azuread_domains" "admin" {
