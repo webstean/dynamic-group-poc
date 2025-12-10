@@ -15,7 +15,6 @@ data "azuread_domains" "admin" {
 }
 
 data "azuread_application_published_app_ids" "well_known" {
-  provider = azuread.workforce
 }
 
 ## Make sure these Service Principals (Enterprise Application) exist in the tenancy
