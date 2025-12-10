@@ -16,10 +16,6 @@ data "azuread_domains" "admin" {
   admin_managed = true
 }
 
-data "azuread_domains" "admin-external" {
-  admin_managed = true
-}
-
 data "azuread_application_published_app_ids" "well_known" {
   provider = azuread.workforce
 }
