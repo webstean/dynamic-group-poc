@@ -4,7 +4,7 @@ data "azuread_users" "all" {
 }
 
 locals {
-  # 2. Filter only Member accounts (exclude Guests)
+  # 2. Filter only Member accounts (excluding Guests)
   members = [
     for u in data.azuread_users.all.users : u
     if lower(try(u.user_type, "")) == "member"
@@ -47,15 +47,13 @@ resource "azuread_group" "exta5_dynamic_groups" {
   description      = "Dynamic group for members with extensionAttribute5 == '${each.value}'"
   security_enabled = true
   mail_enabled     = false
-
-  # Required for dynamic groups in this provider
   types = ["DynamicMembership"]
 
   dynamic_membership {
     enabled = true
 
     # Dynamic membership rule:
-    #  - Only Members (exclude Guests)
+    #  - Only Members (doulbe check, to be sure)
     #  - With matching extensionAttribute5
     rule = "((user.userType -eq \"Member\") and (user.extensionAttribute5 -eq \"${each.value}\"))"
   }
@@ -68,15 +66,13 @@ resource "azuread_group" "exta6_dynamic_groups" {
   description      = "Dynamic group for members with extensionAttribute6 == '${each.value}'"
   security_enabled = true
   mail_enabled     = false
-
-  # Required for dynamic groups in this provider
   types = ["DynamicMembership"]
 
   dynamic_membership {
     enabled = true
 
     # Dynamic membership rule:
-    #  - Only Members (exclude Guests)
+    #  - Only Members (doulbe check, to be sure)
     #  - With matching extensionAttribute6
     rule = "((user.userType -eq \"Member\") and (user.extensionAttribute6 -eq \"${each.value}\"))"
   }
@@ -89,15 +85,13 @@ resource "azuread_group" "exta7_dynamic_groups" {
   description      = "Dynamic group for members with extensionAttribute7 == '${each.value}'"
   security_enabled = true
   mail_enabled     = false
-
-  # Required for dynamic groups in this provider
   types = ["DynamicMembership"]
 
   dynamic_membership {
     enabled = true
 
     # Dynamic membership rule:
-    #  - Only Members (exclude Guests)
+    #  - Only Members (doulbe check, to be sure)
     #  - With matching extensionAttribute7
     rule = "((user.userType -eq \"Member\") and (user.extensionAttribute7 -eq \"${each.value}\"))"
   }
