@@ -34,6 +34,7 @@ terraform {
 
 provider "azurerm" {
   features {}
+  resource_provider_registrations = "none"
   use_aks_workload_identity = false
   use_msi                   = false
   # Authentication strategy: Using OIDC (GitHub Actions) and Azure CLI (interactive) for authentication to Azure AD tenant.
