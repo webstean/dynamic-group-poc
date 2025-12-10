@@ -64,7 +64,7 @@ resource "azuread_group" "exta5_dynamic_groups" {
 resource "azuread_group" "exta6_dynamic_groups" {
   for_each = local.unique_extension_attribute6_set
 
-  display_name     = "Dyn-Division-${each.value}-Members
+  display_name     = "Dyn-Division-${each.value}-Members"
   description      = "Dynamic group for members with extensionAttribute6 == '${each.value}'"
   security_enabled = true
   mail_enabled     = false
@@ -85,7 +85,7 @@ resource "azuread_group" "exta6_dynamic_groups" {
 resource "azuread_group" "exta7_dynamic_groups" {
   for_each = local.unique_extension_attribute7_set
 
-  display_name     = "Dyn-Branch-${each.value}-Members
+  display_name     = "Dyn-Branch-${each.value}-Members"
   description      = "Dynamic group for members with extensionAttribute7 == '${each.value}'"
   security_enabled = true
   mail_enabled     = false
