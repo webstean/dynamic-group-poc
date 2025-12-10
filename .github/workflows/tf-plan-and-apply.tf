@@ -7,9 +7,6 @@ on:
   push:
     branches:
     - main
-    paths:
-      - 'terraform/**.tf'
-      - '.github/workflows/**.yml'
 
 permissions:
   id-token: write
@@ -24,11 +21,11 @@ env:
   #TF_LOG_PATH = "terraform.debug"
   ## Terraform Parallelism
   #TFE_PARALLELISM 
-  ARM_TENANT_ID: ${{ secrets.WORKFORCE_AZURE_TENANT_ID }}
-  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  #ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
   ARM_USE_AZUREAD: "true"
   ARM_USE_OIDC: "true"
-  ARM_CLIENT_ID: ${{ secrets.WORKFORCE_AZURE_CLIENT_ID }} ##"96c63468-1870-4eb4-bbfd-5927fc7f9791" 
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
 
 jobs:
   terraform-plan:
