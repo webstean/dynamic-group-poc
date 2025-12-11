@@ -15,7 +15,7 @@ output azuread_users_all_enabled {
 
 # Output if required
 output azuread_users_company_name {
-  value = data.azuread_users.all[*].user.company_name 
+  value = data.azuread_users.all[*].users.company_name 
 }
 
 locals {
