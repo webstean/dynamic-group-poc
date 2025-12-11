@@ -1,5 +1,6 @@
 ### Create Entra ID (Azure AD) Dynamic Groups
 
+/*
 resource "azuread_group" "dynamic_P1_license" {
   display_name = "Dynamic-License-All-Enabled-Users-with-atleast-EntraID-P1-license"
   description  = "Users: All enabled users with atleast Entra ID P1 (E3) licensing. Note: This will include the P2 users as well"
@@ -31,6 +32,7 @@ resource "azuread_group" "dynamic_P2_license" {
     rule    = "user.accountEnabled -eq true -and (user.assignedPlans -any (assignedPlan.servicePlanId -eq \"eec0eb4f-6444-4f95-aba0-50c24d67f998\" -and assignedPlan.capabilityStatus -eq \"Enabled\"))"
   }
 }
+*/
 
 // Microsoft Entra Workload ID P1 (84c289f0-efcb-486f-8581-07f44fc9efad)
 // Microsoft Entra Workload ID P2 (7dc0e92d-bf15-401d-907e-0884efe7c760)
@@ -214,5 +216,6 @@ resource "azuread_group" "dynamic_all_users_never_expire" {
 RULE
   }
 }
+
 
 
