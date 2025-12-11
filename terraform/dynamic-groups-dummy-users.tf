@@ -13,6 +13,9 @@ locals {
   ]
 }
 
+output members2 {
+  value = local.members2
+}
 output attribute_test {
   value = local.attribute_test
 }
