@@ -4,7 +4,7 @@ data "azuread_users" "all" {
 }
 
 # Output if required
-output azuread_users.all {
+output azuread_users_all {
   value = data.azuread_users.all.users
 }
 
