@@ -9,8 +9,12 @@ locals {
   # 2. Extract location from Members only
   attribute_test = [
     for u in local.members2 :
-    try(startswith(lower(u.usage_location), "a"), null)
+    try(u.usage_location, null)
   ]
+}
+
+output {
+  value = local.attribute_test
 }
 
 /*
