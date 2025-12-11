@@ -3,6 +3,11 @@ data "azuread_users" "all" {
   return_all = true
 }
 
+# Output if required
+output azuread_users.all {
+  value = data.azuread_users.all.users
+}
+
 locals {
   # 2. Filter only Member accounts (excluding Guests)
   members = [
