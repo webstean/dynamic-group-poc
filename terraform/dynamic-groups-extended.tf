@@ -8,6 +8,16 @@ output azuread_users_all {
   value = data.azuread_users.all.users
 }
 
+# Output if required
+output azuread_users_all_enabled {
+  value = data.azuread_users.all.users.account_enabled
+}
+
+# Output if required
+output azuread_users_company_name {
+  value = data.azuread_users.all.company_name
+}
+
 locals {
   # 2. Filter only Member accounts (excluding Guests)
   members = [
