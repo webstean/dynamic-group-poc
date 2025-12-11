@@ -6,18 +6,15 @@ data "azurerm_subscriptions" "available" {}
 data "azuread_client_config" "current" {}
 
 
-#data "azuread_user" "andreww" {
-#  user_principal_name = var.upn
-#}
-
-data "azuread_domains" "admin" {
-  admin_managed = true
-}
-
-data "azuread_application_published_app_ids" "well_known" {
+/*
+data "azuread_user" "andreww" {
+  user_principal_name = var.upn
 }
 
 ## Make sure these Service Principals (Enterprise Application) exist in the tenancy
+data "azuread_application_published_app_ids" "well_known" {
+}
+
 
 resource "azuread_service_principal" "microsoft365" {   ## what the portal calls "Office 365"
   client_id    = "00000003-0000-0ff1-ce00-000000000000" ## Office 365 Sharepoint Online
@@ -35,6 +32,7 @@ resource "azuread_service_principal" "windows365" { ## Windows 365
   client_id    = "0af06dc6-e4b5-4f28-818e-e78e62d137a5"
   use_existing = true
 }
+## azuread_service_principal.windows365.client_id
 
 resource "azuread_service_principal" "microsoft_edge" {
   client_id    = "ecd6b820-32c2-49b6-98a6-444530e5a77a" ## Microsoft Edge
@@ -120,8 +118,9 @@ resource "azuread_service_principal" "azure_powershell" {
 }
 ## azuread_service_principal.azure_powershell.client_id
 
-resource "azuread_service_principal" "microsoft_graph_cli" {
+resource "azuread_service_principal" "graph_cli" {
   client_id    = "14d82eec-204b-4c2f-b7e8-296a70dab67e" // Microsoft Graph Command Line Tools
   use_existing = true
 }
-## azuread_service_principal.azure_powershell.client_id
+## azuread_service_principal.graph_cli.client_id
+*/
