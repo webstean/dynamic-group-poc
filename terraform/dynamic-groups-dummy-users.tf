@@ -13,7 +13,7 @@ locals {
   ]
 }
 
-output {
+output attribute_test {
   value = local.attribute_test
 }
 
