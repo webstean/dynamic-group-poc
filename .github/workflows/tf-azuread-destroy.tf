@@ -4,6 +4,7 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
 on:
+  [workflow_dispatch]
 
 permissions:
   id-token: write
@@ -61,7 +62,7 @@ jobs:
       - name: ⚙️ Terraform Destroy
         run: |
           export exitcode=0
-          terraform -chdir=${{ env.WORKING_DIRECTORY }} destroy -detailed-exitcode -no-color -out tfplan-${{ matrix.runs-on }}.tfplan || export exitcode=$?
+          terraform -chdir=${{ env.WORKING_DIRECTORY }} destroy -detailed-exitcode -no-color || export exitcode=$?
           echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
         
           if [ $exitcode -eq 1 ]; then
