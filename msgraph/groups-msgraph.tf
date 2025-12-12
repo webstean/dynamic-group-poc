@@ -14,6 +14,7 @@ resource "msgraph_resource" "company_dynamic_groups" {
   url = "groups"
   body = {
     displayName     = "Dyn-Company-${each.value}-Members"
+    description     = "Dynamic group for members with companyName == '${each.value}'"
     mailEnabled     = false
     mailNickname    = "dyn-company"
     securityEnabled = true
