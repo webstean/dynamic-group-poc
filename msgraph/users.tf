@@ -9,11 +9,11 @@ data "msgraph_resource" "users" {
 
   response_export_values = {
     ## all          = "@"
-    "companyName" = "companyName"
-    "department" = "department"
-    "extensionAttribute5" = "onPremisesExtensionAttributes.extensionAttribute5"
-    "extensionAttribute6" = "onPremisesExtensionAttributes.extensionAttribute6"
-    "extensionAttribute7" = "onPremisesExtensionAttributes.extensionAttribute7"
+    companyName = "companyName"
+    department = "department"
+    extensionAttribute5 = "onPremisesExtensionAttributes.extensionAttribute5"
+    extensionAttribute6 = "onPremisesExtensionAttributes.extensionAttribute6"
+    extensionAttribute7 = "onPremisesExtensionAttributes.extensionAttribute7"
   }
 }
 
