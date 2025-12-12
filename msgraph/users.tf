@@ -58,7 +58,7 @@ locals {
   extension_attribute7_clean = compact(local.extension_attribute7_raw)
 
   # 3. Deduplicate and sort
-  unique_commpany = sort(distinct(local.company_clean))
+  unique_company = sort(distinct(local.company_clean))
   unique_extension_attribute5 = sort(distinct(local.extension_attribute5_clean))
   unique_extension_attribute6 = sort(distinct(local.extension_attribute6_clean))
   unique_extension_attribute7 = sort(distinct(local.extension_attribute7_clean))
