@@ -9,7 +9,7 @@ resource "msgraph_resource" "company_dynamic_groups" {
     mailNickname    = "dyn-company" ## required even when mail is disabled
     securityEnabled = true
     "owners@odata.bind" = [
-      "https://graph.microsoft.com/v1.0//servicePrincipals/${data.azurerm_client_config.current.object_id}",
+      "https://graph.microsoft.com/v1.0/servicePrincipals/${data.azurerm_client_config.current.object_id}",
     ]
     groupTypes = ["DynamicMembership"]
     membershipRule = <<RULE
@@ -30,7 +30,7 @@ resource "msgraph_resource" "department_dynamic_groups" {
     mailNickname    = "dyn-department" ## required even when mail is disabled
     securityEnabled = true
     "owners@odata.bind" = [
-      "https://graph.microsoft.com/v1.0//servicePrincipals/${data.azurerm_client_config.current.object_id}",
+      "https://graph.microsoft.com/v1.0/servicePrincipals/${data.azurerm_client_config.current.object_id}",
     ]
     groupTypes = ["DynamicMembership"]
     membershipRule = <<RULE
@@ -46,12 +46,12 @@ resource "msgraph_resource" "exta5_dynamic_groups" {
   url = "groups"
   body = {
     displayName     = "Dyn-Group-${each.value}-Members"
-    description      = "Dynamic group for enable members account with extensionAttribute5 == '${each.value}'"
+    description     = "Dynamic group for enable members account with extensionAttribute5 == '${each.value}'"
     mailEnabled     = false
     mailNickname    = "dyn-exta5" ## required even when mail is disabled
     securityEnabled = true
     "owners@odata.bind" = [
-      "https://graph.microsoft.com/v1.0//servicePrincipals/${data.azurerm_client_config.current.object_id}",
+      "https://graph.microsoft.com/v1.0/servicePrincipals/${data.azurerm_client_config.current.object_id}",
     ]
     groupTypes = ["DynamicMembership"]
     membershipRule = <<RULE
