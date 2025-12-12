@@ -72,18 +72,18 @@ locals {
 
 output "list_company_name" {
   description = "List of unique Company Names in Entra ID Tenacy from all enabled member accounts"
-  value = data.msgraph_resource.users.all.companyName
+  value = local.unique_company_set
 }
 output "list_extended_attribute_5" {
   description = "List of unique extensionAttribute5 in Entra ID Tenacy for enable member accounts"
-  value = data.msgraph_resource.users.all.onPremisesExtensionAttributes.extensionAttribute5
+  value = local.unique_extension_attribute5_set 
 }
 output "list_extended_attribute_6" {
   description = "List of unique extensionAttribute6 in Entra ID Tenacy for enable member accounts"
-  value = data.msgraph_resource.users.all.onPremisesExtensionAttributes.extensionAttribute6
+  value = local.unique_extension_attribute6_set 
 }
 output "list_extended_attribute_7" {
   description = "List of unique extensionAttribute7 in Entra ID Tenacy for enable member accounts"
-  value = data.msgraph_resource.users.all.onPremisesExtensionAttributes.extensionAttribute7
+  value = local.unique_extension_attribute7_set 
 }
 
