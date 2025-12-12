@@ -29,13 +29,13 @@ locals {
   # 1. Extract Attributes
   company_raw = [
     for u in local.members :
-    companyName
-    if try(companyName, null) != null
+    u.companyName
+    if try(u.companyName, null) != null
   ]
   department_raw = [
     for u in local.members :
-    department
-    if try(department, null) != null
+    u.department
+    if try(u.department, null) != null
   ]
   extension_attribute5_raw = [
     for u in local.members :
