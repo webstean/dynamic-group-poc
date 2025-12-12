@@ -1,1 +1,163 @@
+name: 'Terraform - msgraph Plan/Apply'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'msgraph/*.tf'
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+env:
+  WORKING_DIRECTORY: ./terraform
+  ## Terraform Debugging
+  ## TRACE, DEBUG, INFO, WARN, ERROR
+  #TF_LOG = "WARN"
+  #TF_LOG_PATH = "terraform.debug"
+  ## Terraform Parallelism
+  #TFE_PARALLELISM 
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  ARM_USE_OIDC: "true"
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  TF_VAR_upn: ${{ secrets.ANDREW_UPN }}  
+
+jobs:
+  terraform-plan:
+    name: 'Terraform Plan'
+    strategy:
+      matrix:
+        runs-on: [ubuntu-latest]
+    runs-on: ${{ matrix.runs-on }}
+    outputs:
+      tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
+
+    steps:
+      ## Checkout the repository
+      - name: ⚙️ Checkout
+        uses: actions/checkout@v4
+        with: 
+          # super-linter needs the full git history to get the
+          # list of files that changed across commits
+          fetch-depth: 0
+
+      ## Install and setup Terraform
+      - name: ⚙️ Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+          terraform_version: latest 
+    
+      ## Fix format of Terraform configuration files to adhere to a canonical format
+      - name: 🔍 Terraform Format
+        run: |
+              terraform \
+              -chdir=${{ env.WORKING_DIRECTORY }} fmt -check
+        continue-on-error: true
+    
+      ## Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+      ## variables: TFSTATE_RESOURCE_GROUP_NAME, TFSTATE_STORAGE_ACCOUNT_NAME, TFSTATE_CONTAINER_NAME
+      - name: 🔍 Terraform Init
+        run: |
+            terraform \
+            -chdir=${{ env.WORKING_DIRECTORY }} init -upgrade
+##          -backend-config="resource_group_name=${TFSTATE_RESOURCE_GROUP_NAME}" \
+##          -backend-config="storage_account_name=${TFSTATE_STORAGE_ACCOUNT_NAME}" \
+##          -backend-config="container_name=${TFSTATE_STORAGE_CONTAINER_NAME}" \
+##          -backend-config="key=${TFSTATE_KEY_NAME}"
+
+      ## Generates an Terraform plan
+      ## An exit code of 0 indicated no changes, 1 a terraform failure, 2 there are pending changes.
+      - name: ⚙️ Terraform Plan
+        id: tf-plan
+        run: |
+          export exitcode=0
+          terraform -chdir=${{ env.WORKING_DIRECTORY }} plan -detailed-exitcode -no-color -out tfplan-${{ matrix.runs-on }}.tfplan || export exitcode=$?
+          echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
+        
+          if [ $exitcode -eq 1 ]; then
+            echo Terraform Plan Failed!
+            echo "## Terraform Plan **FAILED** Output" >> $GITHUB_STEP_SUMMARY
+            echo "<details><summary>Click to expand</summary>" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo '```terraform' >> $GITHUB_STEP_SUMMARY
+            terraform -chdir=${{ env.WORKING_DIRECTORY }} show -no-color tfplan-${{ matrix.runs-on }}.tfplan >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            echo "</details>" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          else 
+            exit 0
+          fi
+
+      ## Save plan to artifacts  
+      - name: ⬆️ Publish Terraform Plan
+        uses: actions/upload-artifact@v4
+        with:
+          name: tfplan-${{ matrix.runs-on }}.tfplan
+          path: ${{ env.WORKING_DIRECTORY }}
+        
+      ## Create string output of Terraform Plan
+      - name: 📄 Add Terraform Plan to Summary
+        run: |
+          echo "## Terraform Plan to be Applied" >> $GITHUB_STEP_SUMMARY
+          echo "<details><summary>Click to expand</summary>" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo '```terraform' >> $GITHUB_STEP_SUMMARY
+          terraform -chdir=${{ env.WORKING_DIRECTORY }} show -no-color tfplan-${{ matrix.runs-on }}.tfplan >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "</details>" >> $GITHUB_STEP_SUMMARY
+                
+  terraform-apply:
+    name: Terraform Apply
+    if: github.ref == 'refs/heads/main' && needs.terraform-plan.outputs.tfplanExitCode == 2 ## only run if plan has changes
+    strategy:
+      matrix:
+        runs-on: [ubuntu-latest]
+    runs-on: ${{ matrix.runs-on }}
+    ## environment: ${{ env.ENVIRONMENT_NAME }}
+    needs: [terraform-plan]
+    
+    steps:
+
+    ## Checkout the repository to the GitHub Actions runner
+    - name: 'Checkout'
+      uses: actions/checkout@v4
+
+    ## Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: 'Setup Terraform'
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_wrapper: false
+        terraform_version: latest
+
+    ## Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      run: |
+        terraform \
+        -chdir=${{ env.WORKING_DIRECTORY }} init -upgrade
+##          -backend-config="resource_group_name=${TFSTATE_RESOURCE_GROUP_NAME}" \
+##          -backend-config="storage_account_name=${TFSTATE_STORAGE_ACCOUNT_NAME}" \
+##          -backend-config="container_name=${TFSTATE_STORAGE_CONTAINER_NAME}" \
+##          -backend-config="key=${TFSTATE_KEY_NAME}"
+
+    ## Download saved plan from artifacts  
+    - name: ⬇️ Download Terraform Plan
+      uses: actions/download-artifact@v4
+      with:
+        name: tfplan-${{ matrix.runs-on }}.tfplan
+        path: ${{ env.WORKING_DIRECTORY }}
+
+    ## Terraform Apply
+    - name: 🚀 Terraform Apply
+      run: |
+        export exitcode=0
+        terraform \
+        -chdir=${{ env.WORKING_DIRECTORY }} apply -auto-approve tfplan-${{ matrix.runs-on }}.tfplan
+        echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
