@@ -64,7 +64,7 @@ jobs:
         run: |
             export exitcode=0
             terraform \
-              -chdir=${{ env.WORKING_DIRECTORY }} apply destroy -auto-approve
+              -chdir=${{ env.WORKING_DIRECTORY }} apply destroy
             echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
             if [ $exitcode -eq 1 ]; then
               echo Terraform DESTROY Failed!
