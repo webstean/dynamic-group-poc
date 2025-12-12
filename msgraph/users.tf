@@ -12,8 +12,21 @@ data "msgraph_resource" "users" {
   }
 }
 
+locals {
+  all_users = [
+    for u in data.msgraph_resource.users : u
+    ## if lower(try(u.user_type, "")) == "member"
+  ]
+}
+
 /*
 locals {
+
+  # 1. Filter only Member accounts (excluding Guests)
+  members2 = [
+    for u in data.azuread_users.all.users : u
+    if lower(try(u.user_type, "")) == "member"
+  ]
   # 3 Extract extensionAttribute
   extension_attribute5_raw = [
     for u in local.members :
