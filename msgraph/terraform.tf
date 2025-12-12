@@ -27,7 +27,7 @@ terraform {
     resource_group_name  = "andrewwebster"
     storage_account_name = "tfwqaesdfghfd"
     container_name       = "tfstate"
-    key                  = "dtp-dynamic-group-poc-msgraph"
+    key                  = "dynamic-group-poc-msgraph"
   }
 }
 
