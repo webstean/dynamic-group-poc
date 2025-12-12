@@ -3,6 +3,7 @@ data "msgraph_resource" "users" {
   response_export_values = {
     all          = "@"
     display_name = "displayName"
+    company_anme = "company_name"
   }
 }
 
