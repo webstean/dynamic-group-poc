@@ -13,7 +13,7 @@ resource "msgraph_resource" "company_dynamic_groups" {
     ]
     groupTypes = ["DynamicMembership"]
     membershipRule = <<RULE
-( (user.accountEnabled -eq true) and (user.userType -eq "Member") and (user.companyName -eq "${each.value}") )
+(user.accountEnabled -eq true) and (user.userType -eq "Member") and (user.companyName -eq "${each.value}")
 RULE
     membershipRuleProcessingState = "On"
   }
