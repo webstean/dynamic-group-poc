@@ -80,23 +80,23 @@ output "members" {
 */
 
 output "list_company_names" {
-  description = "List of all unique Company Names in the Entra ID Tenacy from all enabled member accounts"
+  description = "List of all unique Company Names in the Entra ID Tenacy from all enabled member user accounts"
   value = local.unique_company_set
 }
 output "list_departmemts" {
-  description = "List of all unique Department names in the Entra ID Tenacy from all enabled member accounts"
+  description = "List of all unique Department names in the Entra ID Tenacy from all enabled member user accounts"
   value = local.unique_department_set
 }
 output "list_extended_attribute_5" {
-  description = "List of all unique extensionAttribute5 in the Entra ID Tenacy from all enabled member accounts"
+  description = "List of all unique extensionAttribute5 in the Entra ID Tenacy from all enabled member user accounts"
   value = local.unique_extension_attribute5_set 
 }
 output "list_extended_attribute_6" {
-  description = "List of all unique extensionAttribute6 in the Entra ID Tenacy from all enabled member accounts"
+  description = "List of all unique extensionAttribute6 in the Entra ID Tenacy from all enabled member user accounts"
   value = local.unique_extension_attribute6_set 
 }
 output "list_extended_attribute_7" {
-  description = "List of all unique extensionAttribute7 in the Entra ID Tenacy from all enabled member accounts"
+  description = "List of all unique extensionAttribute7 in the Entra ID Tenacy from all enabled member user accounts"
   value = local.unique_extension_attribute7_set 
 }
 
