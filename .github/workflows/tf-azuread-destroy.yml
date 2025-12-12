@@ -60,13 +60,12 @@ jobs:
 ##          -backend-config="key=tf-state-${{ env.WORKING_DIRECTORY }}"
 
       - name: ⚙️ Terraform Destroy
-        run: |
           export exitcode=0
-          terraform -chdir=${{ env.WORKING_DIRECTORY }} apply -destroy -no-color || export exitcode=$?
+          terraform \
+            -chdir=${{ env.WORKING_DIRECTORY }} plan destory -auto-approve tfplan-${{ matrix.runs-on }}.tfplan
           echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
-        
           if [ $exitcode -eq 1 ]; then
-            echo Terraform Destory Failed!
+            echo Terraform DESTROY Failed!
             exit 1
           else 
             exit 0
