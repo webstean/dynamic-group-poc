@@ -1,12 +1,3 @@
-resource "msgraph_resource" "group" {
-  url = "groups"
-  body = {
-    displayName     = "My Test xGroup"
-    mailEnabled     = false
-    mailNickname    = "mygroup"
-    securityEnabled = true
-  }
-}
 
 resource "azuread_group_without_members" "company_dynamic_groups" {
   for_each = local.unique_company_set
@@ -21,8 +12,8 @@ resource "azuread_group_without_members" "company_dynamic_groups" {
     enabled = true
 
     # Dynamic membership rule:
-    #  - Only Members, No Guests (double check)
-    rule = "((user.userType -eq \"Member\") and (user.company -eq \"${each.value}\"))"
+    # - Only Members, No Guests, Account Enabled
+    rule = "( (user.accountEnabled -eq true) and (user.userType -eq \"Member\") and (user.company -eq \"${each.value}\"))"
   }
 }
 
@@ -39,8 +30,8 @@ resource "azuread_group_without_members" "department_dynamic_groups" {
     enabled = true
 
     # Dynamic membership rule:
-    #  - Only Members, No Guests (double check)
-    rule = "((user.userType -eq \"Member\") and (user.department -eq \"${each.value}\"))"
+    # - Only Members, No Guests, Account Enabled
+    rule = "( (user.accountEnabled -eq true) and (user.userType -eq \"Member\") and (user.department -eq \"${each.value}\"))"
   }
 }
 
@@ -57,8 +48,8 @@ resource "azuread_group_without_members" "exta5_dynamic_groups" {
     enabled = true
 
     # Dynamic membership rule:
-    #  - Only Members, No Guests (double check)
-    rule = "((user.userType -eq \"Member\") and (user.extensionAttribute5 -eq \"${each.value}\"))"
+    # - Only Members, No Guests, Account Enabled
+    rule = "( (user.accountEnabled -eq true) and (user.userType -eq \"Member\") and (user.extensionAttribute5 -eq \"${each.value}\"))"
   }
 }
 
@@ -75,8 +66,8 @@ resource "azuread_group_without_members" "exta6_dynamic_groups" {
     enabled = true
 
     # Dynamic membership rule:
-    #  - Only Members, No Guests (double check)
-    rule = "((user.userType -eq \"Member\") and (user.extensionAttribute6 -eq \"${each.value}\"))"
+    # - Only Members, No Guests, Account Enabled
+    rule = "( (user.accountEnabled -eq true) and (user.userType -eq \"Member\") and (user.extensionAttribute6 -eq \"${each.value}\"))"
   }
 }
 
@@ -93,7 +84,7 @@ resource "azuread_group_without_members" "exta7_dynamic_groups" {
     enabled = true
 
     # Dynamic membership rule:
-    #  - Only Members, No Guests (double check)
-    rule = "((user.userType -eq \"Member\") and (user.extensionAttribute7 -eq \"${each.value}\"))"
+    # - Only Members, No Guests, Account Enabled
+    rule = "( (user.accountEnabled -eq true) and (user.userType -eq \"Member\") and (user.extensionAttribute7 -eq \"${each.value}\"))"
   }
 }
