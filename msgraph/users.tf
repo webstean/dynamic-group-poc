@@ -65,8 +65,8 @@ locals {
   unique_extension_attribute7 = sort(distinct(local.extension_attribute7_clean))
 
   # 4. Turn the list into a set for for_each
-  unique_company_set = sort(distinct(local.unique_company))
-  unique_department_set = sort(distinct(local.unique_department))
+  unique_company_set = toset(local.unique_company)
+  unique_department_set = toset(local.unique_department)
   unique_extension_attribute5_set = toset(local.unique_extension_attribute5)
   unique_extension_attribute6_set = toset(local.unique_extension_attribute6)
   unique_extension_attribute7_set = toset(local.unique_extension_attribute7)
