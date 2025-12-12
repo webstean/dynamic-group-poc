@@ -1,7 +1,7 @@
 data "msgraph_resource" "users" {
   url = "users"
   query_parameters = {
-    "$select" = ["id", "surnameName", "givenName", "postalCode"]
+    "$select" = ["id", "mail", "givenName", "companyName", "postalCode"]
 #    "$filter" = [
 #       "mailEnabled eq false and securityEnabled eq true",
 #    ]
