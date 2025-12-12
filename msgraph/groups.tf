@@ -43,7 +43,6 @@ resource "azuread_group" "department_dynamic_groups" {
     rule = "((user.userType -eq \"Member\") and (user.department -eq \"${each.value}\"))"
   }
 }
-*/
 
 resource "azuread_group" "exta5_dynamic_groups" {
   for_each = local.unique_extension_attribute5_set
