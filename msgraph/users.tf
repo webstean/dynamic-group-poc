@@ -9,11 +9,6 @@ data "msgraph_resource" "users" {
 
   response_export_values = {
     all          = "@"
-    companyName = "@"
-    department = "@"
-    onPremisesExtensionAttributes.extensionAttribute5 = "@"
-    onPremisesExtensionAttributes.extensionAttribute6 = "@"
-    onPremisesExtensionAttributes.extensionAttribute7 = "@"
   }
 }
 
@@ -21,30 +16,30 @@ locals {
   # Query output into local variable
   members = [
     for u in data.msgraph_resource.users : u
-    ## if lower(try(u.user_type, "")) == "member"
+    ## if lower(try(u.all.user_type, "")) == "member"
   ]
 
   # 1. Extract Attributes
   company_raw = [
     for u in local.members :
-    try(u.companyName, null)
+    try(u.all.companyName, null)
   ]
   department_raw = [
     for u in local.members :
-    try(u.department, null)
+    try(u.all.department, null)
   ]
 
   extension_attribute5_raw = [
     for u in local.members :
-    try(u.extension_attributes.extension_attribute5, null)
+    try(u.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute5, null)
   ]
   extension_attribute6_raw = [
     for u in local.members :
-    try(u.extension_attributes.extension_attribute6, null)
+    try(u.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute6, null)
   ]
   extension_attribute7_raw = [
     for u in local.members :
-    try(u.extension_attributes.extension_attribute7, null)
+    try(u.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute7, null)
   ]
 
   # 2. Remove null / empty values
