@@ -199,7 +199,7 @@ RULE
 
 resource "azuread_group_without_members" "dynamic_all_users_never_expire" {
   display_name = "Dynamic-Users-All-With-Password-Never-Expires"
-  description  = "Users: All enabled users (members and guests)"
+  description  = "Users: All enabled users (members and guests) with password that do not expire"
   owners = [
     data.azuread_client_config.current.object_id,
   ]
@@ -214,4 +214,5 @@ resource "azuread_group_without_members" "dynamic_all_users_never_expire" {
 RULE
   }
 }
+
 
