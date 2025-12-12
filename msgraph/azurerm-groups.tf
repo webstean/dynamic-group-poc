@@ -1,4 +1,4 @@
-
+/*
 resource "azuread_group_without_members" "company_dynamic_groups" {
   for_each = local.unique_company_set
 
@@ -88,3 +88,4 @@ resource "azuread_group_without_members" "exta7_dynamic_groups" {
     rule = "( (user.accountEnabled -eq true) and (user.userType -eq \"Member\") and (user.extensionAttribute7 -eq \"${each.value}\"))"
   }
 }
+*/
