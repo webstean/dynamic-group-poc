@@ -17,21 +17,11 @@ data "msgraph_resource" "users" {
 }
 
 locals {
+  # Query output into local variable
   members = [
     for u in data.msgraph_resource.users : u
     ## if lower(try(u.user_type, "")) == "member"
   ]
-}
-
-/*
-output "list_all_users" {
-  description = "List of All Users with applicable values"
-  value = local.all_users
-}
-*/
-
-
-locals {
 
   # 1. Extract Attributes
   company_raw = [
@@ -70,20 +60,25 @@ locals {
   unique_extension_attribute7_set = toset(local.unique_extension_attribute7)
 }
 
+output "company_raw" {
+  description = "List of all unique Company Names in the Entra ID Tenacy from all enabled member accounts"
+  value = local.company_raw
+}
+
 output "list_company_name" {
-  description = "List of unique Company Names in Entra ID Tenacy from all enabled member accounts"
+  description = "List of all unique Company Names in the Entra ID Tenacy from all enabled member accounts"
   value = local.unique_company_set
 }
 output "list_extended_attribute_5" {
-  description = "List of unique extensionAttribute5 in Entra ID Tenacy from all enabled member accounts"
+  description = "List of all unique extensionAttribute5 in the Entra ID Tenacy from all enabled member accounts"
   value = local.unique_extension_attribute5_set 
 }
 output "list_extended_attribute_6" {
-  description = "List of unique extensionAttribute6 in Entra ID Tenacy from all enabled member accounts"
+  description = "List of all unique extensionAttribute6 in the Entra ID Tenacy from all enabled member accounts"
   value = local.unique_extension_attribute6_set 
 }
 output "list_extended_attribute_7" {
-  description = "List of unique extensionAttribute7 in Entra ID Tenacy from all enabled member accounts"
+  description = "List of all unique extensionAttribute7 in the Entra ID Tenacy from all enabled member accounts"
   value = local.unique_extension_attribute7_set 
 }
 
