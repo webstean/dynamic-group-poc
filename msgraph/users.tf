@@ -13,6 +13,39 @@ data "msgraph_resource" "users" {
 }
 
 /*
+locals {
+  # 3 Extract extensionAttribute
+  extension_attribute5_raw = [
+    for u in local.members :
+    try(u.extension_attributes.extension_attribute5, null)
+  ]
+  extension_attribute6_raw = [
+    for u in local.members :
+    try(u.extension_attributes.extension_attribute6, null)
+  ]
+  extension_attribute7_raw = [
+    for u in local.members :
+    try(u.extension_attributes.extension_attribute7, null)
+  ]
+
+  # 4. Remove null / empty values
+  extension_attribute5_clean = compact(local.extension_attribute5_raw)
+  extension_attribute6_clean = compact(local.extension_attribute6_raw)
+  extension_attribute7_clean = compact(local.extension_attribute7_raw)
+
+  # 5. Deduplicate and sort
+  unique_extension_attribute5 = sort(distinct(local.extension_attribute5_clean))
+  unique_extension_attribute6 = sort(distinct(local.extension_attribute6_clean))
+  unique_extension_attribute7 = sort(distinct(local.extension_attribute7_clean))
+
+  # 6. Turn the list into a set for for_each
+  unique_extension_attribute5_set = toset(local.unique_extension_attribute5)
+  unique_extension_attribute6_set = toset(local.unique_extension_attribute6)
+  unique_extension_attribute7_set = toset(local.unique_extension_attribute7)
+}
+*/
+
+/*
 output "list_company_name" {
   description = "List of Company Name"
   value = data.msgraph_resource.users.all.companyName
