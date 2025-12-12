@@ -70,7 +70,7 @@ jobs:
             -chdir=${{ env.WORKING_DIRECTORY }} init -upgrade
 ##          -backend-config="resource_group_name=${TFSTATE_RESOURCE_GROUP_NAME}" \
 ##          -backend-config="storage_account_name=${TFSTATE_STORAGE_ACCOUNT_NAME}" \
-##          -backend-config="container_name=${TFSTATE_STORAGE_CONTAINER_NAME}" \
+##          -backend-config="container_name=tfstate" \
 ##          -backend-config="key=tf-state-${{ env.WORKING_DIRECTORY }}"
 
       ## Generates an Terraform plan
@@ -144,7 +144,7 @@ jobs:
         -chdir=${{ env.WORKING_DIRECTORY }} init -upgrade
 ##          -backend-config="resource_group_name=${TFSTATE_RESOURCE_GROUP_NAME}" \
 ##          -backend-config="storage_account_name=${TFSTATE_STORAGE_ACCOUNT_NAME}" \
-##          -backend-config="container_name=${TFSTATE_STORAGE_CONTAINER_NAME}" \
+##          -backend-config="container_name=tfstate" \
 ##          -backend-config="key=tf-state-${{ env.WORKING_DIRECTORY }}"
 
     ## Download saved plan from artifacts  
