@@ -1,3 +1,13 @@
+resource "msgraph_resource" "group" {
+  url = "groups"
+  body = {
+    displayName     = "My Group"
+    mailEnabled     = false
+    mailNickname    = "mygroup"
+    securityEnabled = true
+  }
+}
+
 resource "msgraph_resource" "company_dynamic_groups" {
   for_each = local.unique_company_set
 
@@ -7,9 +17,9 @@ resource "msgraph_resource" "company_dynamic_groups" {
     mailEnabled     = false
     mailNickname    = "dyn-company"
     securityEnabled = true
-    "owners@odata.bind" = [
-      "https://graph.microsoft.com/v1.0/users/${data.azurerm_client_config.current.object_id}",
-    ]
+#    "owners@odata.bind" = [
+#      "https://graph.microsoft.com/v1.0/users/${data.azurerm_client_config.current.object_id}",
+#    ]
 #    groupTypes = ["DynamicMembership"]
 #    membershipRule = <<RULE
 #( (user.accountEnabled -eq true) and (user.userType -eq "Member") and (user.companyName -eq "${each.value}") )
