@@ -1,4 +1,4 @@
-name: 'Terraform - azuread DESTOY'
+name: 'Terraform - azuread DESTROY'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -9,7 +9,7 @@ on:
 permissions:
   id-token: write
   contents: read
-  pull-requests: write
+  pull-requests: read
 
 env:
   WORKING_DIRECTORY: ./azuread
