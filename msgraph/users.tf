@@ -13,10 +13,18 @@ data "msgraph_resource" "users" {
 }
 
 locals {
-  # Query output into local variable
-  members = [
-    for u in data.msgraph_resource.users : u
-  ]
+  # Cleanup Query output into local variable
+  members = try(
+    [
+      for u in data.msgraph_resource.users :
+      u.all.value...
+      if can(u.all.value)
+    ][0],
+    []
+  )
+#  members = [
+#    for u in data.msgraph_resource.users : u
+#  ]
 
   # 1. Extract Attributes
   company_raw = [
