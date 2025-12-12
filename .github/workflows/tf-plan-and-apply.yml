@@ -6,7 +6,9 @@ concurrency:
 on:
   push:
     branches:
-    - main
+      - main
+    paths:
+      - 'azuread/*.tf'
 
 permissions:
   id-token: write
@@ -111,8 +113,7 @@ jobs:
           terraform -chdir=${{ env.WORKING_DIRECTORY }} show -no-color tfplan-${{ matrix.runs-on }}.tfplan >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           echo "</details>" >> $GITHUB_STEP_SUMMARY
-            
-               
+                
   terraform-apply:
     name: Terraform Apply
     if: github.ref == 'refs/heads/main' && needs.terraform-plan.outputs.tfplanExitCode == 2 ## only run if plan has changes
