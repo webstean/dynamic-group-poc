@@ -62,7 +62,7 @@ jobs:
       - name: ⚙️ Terraform Destroy
         run: |
           export exitcode=0
-          terraform -chdir=${{ env.WORKING_DIRECTORY }} destroy -no-color || export exitcode=$?
+          terraform -chdir=${{ env.WORKING_DIRECTORY }} apply -destroy -no-color || export exitcode=$?
           echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
         
           if [ $exitcode -eq 1 ]; then
