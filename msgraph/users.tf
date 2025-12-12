@@ -2,9 +2,9 @@ data "msgraph_resource" "users" {
   url = "users"
   query_parameters = {
     "$select" = ["id", "mail", "givenName", "surname", "companyName", "postalCode", "onPremisesExtensionAttributes"]
-#    "$filter" = [
-#       "mailEnabled eq false and securityEnabled eq true",
-#    ]
+    "$filter" = [
+       "isEnabled eq true and includedUserTypes eq 'member'",
+    ]
   }
 
   response_export_values = {
