@@ -1,0 +1,72 @@
+name: 'Terraform - azuread DESTOY'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+on:
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+env:
+  WORKING_DIRECTORY: ./azuread
+  ## Terraform Debugging
+  ## TRACE, DEBUG, INFO, WARN, ERROR
+  #TF_LOG = "WARN"
+  #TF_LOG_PATH = "terraform.debug"
+  ## Terraform Parallelism
+  #TFE_PARALLELISM 
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  ARM_USE_OIDC: "true"
+  ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  TF_VAR_upn: ${{ secrets.ANDREW_UPN }}  
+
+jobs:
+  terraform-destroy:
+    name: 'Terraform Destroy'
+    strategy:
+      matrix:
+        runs-on: [ubuntu-latest]
+    runs-on: ${{ matrix.runs-on }}
+
+    steps:
+      ## Checkout the repository
+      - name: ⚙️ Checkout
+        uses: actions/checkout@v4
+        with: 
+          # super-linter needs the full git history to get the
+          # list of files that changed across commits
+          fetch-depth: 0
+
+      ## Install and setup Terraform
+      - name: ⚙️ Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+          terraform_version: latest 
+    
+      ## Terraform Init
+      - name: 🔍 Terraform Init
+        run: |
+            terraform \
+            -chdir=${{ env.WORKING_DIRECTORY }} init -upgrade
+##          -backend-config="resource_group_name=${TFSTATE_RESOURCE_GROUP_NAME}" \
+##          -backend-config="storage_account_name=${TFSTATE_STORAGE_ACCOUNT_NAME}" \
+##          -backend-config="container_name=tfstate" \
+##          -backend-config="key=tf-state-${{ env.WORKING_DIRECTORY }}"
+
+      - name: ⚙️ Terraform Destroy
+        run: |
+          export exitcode=0
+          terraform -chdir=${{ env.WORKING_DIRECTORY }} destroy -detailed-exitcode -no-color -out tfplan-${{ matrix.runs-on }}.tfplan || export exitcode=$?
+          echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
+        
+          if [ $exitcode -eq 1 ]; then
+            echo Terraform Destory Failed!
+          else 
+            exit 0
+          fi
+
