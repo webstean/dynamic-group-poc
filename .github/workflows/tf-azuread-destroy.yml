@@ -63,7 +63,7 @@ jobs:
         run: |
           export exitcode=0
           terraform \
-            -chdir=${{ env.WORKING_DIRECTORY }} plan destory -auto-approve tfplan-${{ matrix.runs-on }}.tfplan
+            -chdir=${{ env.WORKING_DIRECTORY }} plan destory -auto-approve
           echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
           if [ $exitcode -eq 1 ]; then
             echo Terraform DESTROY Failed!
