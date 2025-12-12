@@ -3,7 +3,7 @@ resource "msgraph_resource" "group" {
   body = {
     displayName     = "My Test Group"
     mailEnabled     = false
-    mailNickname    = "mygroupxy"
+    mailNickname    = "mygroup"
     securityEnabled = true
   }
 }
