@@ -13,7 +13,7 @@ resource "azuread_group_without_members" "company_dynamic_groups" {
 
     # Dynamic membership rule:
     # - Only Members, No Guests, Account Enabled
-    rule = "( (user.accountEnabled -eq true) and (user.userType -eq \"Member\") and (user.company -eq \"${each.value}\"))"
+    rule = "( (user.accountEnabled -eq true) and (user.userType -eq \"Member\") and (user.companyName -eq \"${each.value}\"))"
   }
 }
 
