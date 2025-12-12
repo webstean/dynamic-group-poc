@@ -3,7 +3,7 @@ data "msgraph_resource" "users" {
   query_parameters = {
     "$select" = ["id", "mail", "givenName", "surname", "companyName", "postalCode", "onPremisesExtensionAttributes"]
     "$filter" = [
-       "isEnabled eq true and includedUserTypes eq 'member'",
+       "accountEnabled eq true and userType eq 'Member'",
     ]
   }
 
