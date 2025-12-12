@@ -8,12 +8,11 @@ resource "msgraph_resource" "group" {
   }
 }
 
-/*
 resource "azuread_group" "company_dynamic_groups" {
-  for_each = local.unique_extension_attribute5_set
+  for_each = local.unique_company_set
 
   display_name     = "Dyn-Company-${each.value}-Members"
-  description      = "Dynamic group for members with extensionAttribute5 == '${each.value}'"
+  description      = "Dynamic group for members with companyName == '${each.value}'"
   security_enabled = true
   mail_enabled     = false
   types = ["DynamicMembership"]
@@ -23,16 +22,15 @@ resource "azuread_group" "company_dynamic_groups" {
 
     # Dynamic membership rule:
     #  - Only Members, No Guests (double check)
-    #  - With matching extensionAttribute5
-    rule = "((user.userType -eq \"Member\") and (user.extensionAttribute5 -eq \"${each.value}\"))"
+    rule = "((user.userType -eq \"Member\") and (user.company -eq \"${each.value}\"))"
   }
 }
 
-resource "azuread_group" "departmnet_dynamic_groups" {
-  for_each = local.unique_extension_attribute5_set
+resource "azuread_group" "department_dynamic_groups" {
+  for_each = local.unique_department_set
 
   display_name     = "Dyn-Departmnet-${each.value}-Members"
-  description      = "Dynamic group for members with extensionAttribute5 == '${each.value}'"
+  description      = "Dynamic group for members with department == '${each.value}'"
   security_enabled = true
   mail_enabled     = false
   types = ["DynamicMembership"]
@@ -42,8 +40,7 @@ resource "azuread_group" "departmnet_dynamic_groups" {
 
     # Dynamic membership rule:
     #  - Only Members, No Guests (double check)
-    #  - With matching extensionAttribute5
-    rule = "((user.userType -eq \"Member\") and (user.extensionAttribute5 -eq \"${each.value}\"))"
+    rule = "((user.userType -eq \"Member\") and (user.department -eq \"${each.value}\"))"
   }
 }
 */
@@ -62,7 +59,6 @@ resource "azuread_group" "exta5_dynamic_groups" {
 
     # Dynamic membership rule:
     #  - Only Members, No Guests (double check)
-    #  - With matching extensionAttribute5
     rule = "((user.userType -eq \"Member\") and (user.extensionAttribute5 -eq \"${each.value}\"))"
   }
 }
@@ -81,7 +77,6 @@ resource "azuread_group" "exta6_dynamic_groups" {
 
     # Dynamic membership rule:
     #  - Only Members, No Guests (double check)
-    #  - With matching extensionAttribute6
     rule = "((user.userType -eq \"Member\") and (user.extensionAttribute6 -eq \"${each.value}\"))"
   }
 }
@@ -100,7 +95,6 @@ resource "azuread_group" "exta7_dynamic_groups" {
 
     # Dynamic membership rule:
     #  - Only Members, No Guests (double check)
-    #  - With matching extensionAttribute7
     rule = "((user.userType -eq \"Member\") and (user.extensionAttribute7 -eq \"${each.value}\"))"
   }
 }
