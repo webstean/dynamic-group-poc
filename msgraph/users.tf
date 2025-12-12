@@ -1,5 +1,5 @@
 data "msgraph_resource" "users" {
-  url = 'users?$select=displayName,givenName,postalCode,identities,companyName'
+  url = "users?$select=displayName,givenName,postalCode,identities,companyName"
   response_export_values = {
     all          = "@"
 #    display_name = "displayName"
