@@ -9,6 +9,9 @@ data "msgraph_resource" "users" {
 
   response_export_values = {
     all          = "@"
+    onPremisesExtensionAttributes.extensionAttribute5 = "extensionAttribute5"
+    onPremisesExtensionAttributes.extensionAttribute6 = "extensionAttribute6"
+    onPremisesExtensionAttributes.extensionAttribute7 = "extensionAttribute7"
   }
 }
 
