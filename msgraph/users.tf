@@ -15,11 +15,11 @@ data "msgraph_resource" "users" {
 locals {
   # Cleanup Query output into local variable
   members = try(
-    [
-      for u in data.msgraph_resource.users :
-      u.all.value...
-      if can(u.all.value)
-    ][0],
+    flatten([
+      for item in data.msgraph_resource.users :
+      item.all.value
+      if can(item.all.value)
+    ]),
     []
   )
 #  members = [
