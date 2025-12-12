@@ -17,7 +17,7 @@ data "msgraph_resource" "users" {
 }
 
 locals {
-  mumbers = [
+  members = [
     for u in data.msgraph_resource.users : u
     ## if lower(try(u.user_type, "")) == "member"
   ]
