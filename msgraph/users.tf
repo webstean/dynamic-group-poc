@@ -8,7 +8,7 @@ data "msgraph_resource" "users" {
   }
 
   response_export_values = {
-    ## all          = "@"
+    all          = "@"
     companyName = "companyName"
     department = "department"
     extensionAttribute5 = "onPremisesExtensionAttributes.extensionAttribute5"
