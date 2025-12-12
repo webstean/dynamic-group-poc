@@ -70,28 +70,20 @@ locals {
   unique_extension_attribute7_set = toset(local.unique_extension_attribute7)
 }
 
-/*
 output "list_company_name" {
-  description = "List of Company Name"
+  description = "List of unique Company Names in Entra ID Tenacy from all enabled member accounts"
   value = data.msgraph_resource.users.all.companyName
 }
 output "list_extended_attribute_5" {
-  description = "List of Extended Attribute #5"
+  description = "List of unique extensionAttribute5 in Entra ID Tenacy for enable member accounts"
   value = data.msgraph_resource.users.all.onPremisesExtensionAttributes.extensionAttribute5
 }
 output "list_extended_attribute_6" {
-  description = "List of Extended Attribute #6"
+  description = "List of unique extensionAttribute6 in Entra ID Tenacy for enable member accounts"
   value = data.msgraph_resource.users.all.onPremisesExtensionAttributes.extensionAttribute6
 }
 output "list_extended_attribute_7" {
-  description = "List of Extended Attribute #7"
+  description = "List of unique extensionAttribute7 in Entra ID Tenacy for enable member accounts"
   value = data.msgraph_resource.users.all.onPremisesExtensionAttributes.extensionAttribute7
 }
-*/
 
-/*
-output "all" {
-  description = "All Users"
-  value = data.msgraph_resource.users.output.all
-}
-*/
