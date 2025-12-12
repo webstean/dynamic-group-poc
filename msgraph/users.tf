@@ -3,8 +3,7 @@ data "msgraph_resource" "users" {
   query_parameters = {
     "$select" = ["id", "surnameName", "givenName", "postalCode"]
 #    "$filter" = [
-#      "mailEnabled eq false",
-#      "securityEnabled eq true",
+#       "mailEnabled eq false and securityEnabled eq true",
 #    ]
   }
 
@@ -15,10 +14,10 @@ data "msgraph_resource" "users" {
 
 ## GET https://graph.microsoft.com/v1.0/users/87d349ed-44d7-43e1-9a83-5f2406dee5bd?$select=displayName,givenName,postalCode,identities
 
-output "display_names" {
-  description = "All Display Names"
-  value = data.msgraph_resource.users.output.display_name
-}
+#output "display_names" {
+#  description = "All Display Names"
+#  value = data.msgraph_resource.users.output.display_name
+#}
 
 output "all" {
   description = "All Users"
