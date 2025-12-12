@@ -1,7 +1,7 @@
 ### Create Entra ID (Azure AD) Dynamic Groups
 
 resource "azuread_group_without_members" "dynamic_P1_license" {
-  display_name = "Dynamic-License-All-Enabled-Users-with-atleast-EntraID-P1-license"
+  display_name = "Dyn-License-All-Enabled-Users-with-atleast-EntraID-P1-license"
   description  = "Users: All enabled users with atleast Entra ID P1 (E3) licensing. Note: This will include the P2 users as well"
   owners = [
     data.azuread_client_config.current.object_id,
@@ -17,7 +17,7 @@ resource "azuread_group_without_members" "dynamic_P1_license" {
 }
 
 resource "azuread_group_without_members" "dynamic_P2_license" {
-  display_name = "Dynamic-License-All-Enabled-Users-with-atleast-EntraID-P2-license"
+  display_name = "Dyn-License-All-Enabled-Users-with-atleast-EntraID-P2-license"
   description  = "Users: All enabled users with atleast Entra ID P2 (E5) licensing. Note: Most Entra ID saveguards are only available to P1 or above users"
   owners = [
     data.azuread_client_config.current.object_id,
@@ -35,7 +35,7 @@ resource "azuread_group_without_members" "dynamic_P2_license" {
 // Microsoft Entra Workload ID P1 (84c289f0-efcb-486f-8581-07f44fc9efad)
 // Microsoft Entra Workload ID P2 (7dc0e92d-bf15-401d-907e-0884efe7c760)
 resource "azuread_group_without_members" "dynamic_WP1_license" {
-  display_name = "Dynamic-License-All-Enabled-Principles-with-WorkloadID-P1-license"
+  display_name = "Dyn-License-All-Enabled-Principles-with-WorkloadID-P1-license"
   description  = "Principles: All enabled principles with Microsoft Entra Workload ID P1 licensing. Note: Most Entra ID conditional access are only available to P1 or above users"
   owners = [
     data.azuread_client_config.current.object_id,
@@ -53,7 +53,7 @@ RULE
 }
 
 resource "azuread_group_without_members" "dynamic_WP2_license" {
-  display_name = "Dynamic-License-All-Enabled-Principles-with-WorkloadID-P2-license"
+  display_name = "Dyn-License-All-Enabled-Principles-with-WorkloadID-P2-license"
   description  = "Principles: All enabled principles with Microsoft Entra Workload ID P2 licensing. Note: Most Entra ID saveguards are only available to P1 or above users"
   owners = [
     data.azuread_client_config.current.object_id,
@@ -71,7 +71,7 @@ RULE
 }
 
 resource "azuread_group_without_members" "dynamic_dynamics_365" {
-  display_name = "Dynamic-License-All-Enabled-Users-with-either-Dynamics-365-CRM-Professional-or-Enterprise-License"
+  display_name = "Dyn-License-All-Enabled-Users-with-either-Dynamics-365-CRM-Professional-or-Enterprise-License"
   description  = "Users: All enabled users with either the Dynamics 365 Sales (CRM) Professional or Enterprise License"
   owners = [
     data.azuread_client_config.current.object_id,
@@ -89,7 +89,7 @@ RULE
 }
 
 resource "azuread_group_without_members" "dynamic_dynamics_d365_professional" {
-  display_name = "Dynamic-License-All-Enabled-Users-with-Dynamics-365-CRM-Professional"
+  display_name = "Dyn-License-All-Enabled-Users-with-Dynamics-365-CRM-Professional"
   description  = "Users: All enabled users with Dynamics 365 Sales (CRM) Professional"
   owners = [
     data.azuread_client_config.current.object_id,
@@ -105,7 +105,7 @@ resource "azuread_group_without_members" "dynamic_dynamics_d365_professional" {
 }
 
 resource "azuread_group_without_members" "dynamic_dynamics_d365_enterprise" {
-  display_name = "Dynamic-License-All-Enabled-Users-with-Dynamics-365-CRM-Enterprise"
+  display_name = "Dyn-License-All-Enabled-Users-with-Dynamics-365-CRM-Enterprise"
   description  = "Users: All enabled users with Dynamics 365 Sales (CRM) Enterprise"
   owners = [
     data.azuread_client_config.current.object_id,
@@ -121,7 +121,7 @@ resource "azuread_group_without_members" "dynamic_dynamics_d365_enterprise" {
 }
 
 resource "azuread_group_without_members" "dynamic_dynamic_dataverse_msteams" {
-  display_name = "Dynamic-License-All-Enabled-Users-with-Dataverse-for-MS-Teams"
+  display_name = "Dyn-License-All-Enabled-Users-with-Dataverse-for-MS-Teams"
   description  = "Users: All enabled users with Dataverse for Microsoft Teams"
   owners = [
     data.azuread_client_config.current.object_id,
@@ -162,7 +162,7 @@ RULE
 }
 
 resource "azuread_group_without_members" "dynamic_all_guest_users" {
-  display_name = "Dynamic-Users-All-Guests"
+  display_name = "Dyn-Users-All-Guests"
   description  = "Users: All Enabled Guest Users"
   owners = [
     data.azuread_client_config.current.object_id,
@@ -180,7 +180,7 @@ RULE
 }
 
 resource "azuread_group_without_members" "dynamic_all_users" {
-  display_name = "Dynamic-Users-All"
+  display_name = "Dyn-Users-All"
   description  = "Users: All enabled users (members and guests)"
   owners = [
     data.azuread_client_config.current.object_id,
@@ -198,8 +198,8 @@ RULE
 }
 
 resource "azuread_group_without_members" "dynamic_all_users_never_expire" {
-  display_name = "Dynamic-Users-All-With-Password-Never-Expires"
-  description  = "Users: All enabled users (members and guests) with password that do not expire"
+  display_name = "Dyn-Users-All-With-Password-Never-Expires"
+  description  = "Users: All enabled users (members and guests) with password that do not expire (from Active Directory"
   owners = [
     data.azuread_client_config.current.object_id,
   ]
@@ -214,5 +214,6 @@ resource "azuread_group_without_members" "dynamic_all_users_never_expire" {
 RULE
   }
 }
+
 
 
