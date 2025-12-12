@@ -16,34 +16,33 @@ locals {
   # Query output into local variable
   members = [
     for u in data.msgraph_resource.users : u
-    ## if lower(try(u.all.user_type, "")) == "member"
   ]
 
   # 1. Extract Attributes
   company_raw = [
     for u in local.members :
-    u.all.companyName
-    if try(u.all.companyName, null) != null
+    u.users.all.companyName
+    if try(u.users.all.companyName, null) != null
   ]
   department_raw = [
     for u in local.members :
-    u.all.department
-    if try(u.all.department, null) != null
+    u.users.all.department
+    if try(u.users.all.department, null) != null
   ]
   extension_attribute5_raw = [
     for u in local.members :
-    u.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute5
-    if try(u.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute5, null) != null
+    u.users.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute5
+    if try(u.users.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute5, null) != null
   ]
   extension_attribute6_raw = [
     for u in local.members :
-    u.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute6
-    if try(u.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute6, null) != null
+    u.users.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute6
+    if try(u.users.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute6, null) != null
   ]
   extension_attribute7_raw = [
     for u in local.members :
-    u.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute7
-    if try(u.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute7, null) != null
+    u.users.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute7
+    if try(u.users.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute7, null) != null
   ]
 
   # 2. Remove null / empty values
@@ -68,9 +67,11 @@ locals {
   unique_extension_attribute7_set = toset(local.unique_extension_attribute7)
 }
 
+/*
 output "members" {
   value = local.members
 }
+*/
 
 output "list_company" {
   description = "List of all unique Company Names in the Entra ID Tenacy from all enabled member accounts"
