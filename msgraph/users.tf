@@ -19,6 +19,12 @@ locals {
   ]
 }
 
+output "list_all_users" {
+  description = "List of All Users with applicable values"
+  value = local.all_users
+}
+
+
 /*
 locals {
 
