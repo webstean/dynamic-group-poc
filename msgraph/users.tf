@@ -29,6 +29,11 @@ locals {
     for u in local.members :
     try(u.companyName, null)
   ]
+  department_raw = [
+    for u in local.members :
+    try(u.department, null)
+  ]
+
   extension_attribute5_raw = [
     for u in local.members :
     try(u.extension_attributes.extension_attribute5, null)
