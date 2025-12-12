@@ -17,27 +17,27 @@ data "msgraph_resource" "users" {
 }
 
 locals {
-  all_users = [
+  mumbers = [
     for u in data.msgraph_resource.users : u
     ## if lower(try(u.user_type, "")) == "member"
   ]
 }
 
+/*
 output "list_all_users" {
   description = "List of All Users with applicable values"
   value = local.all_users
 }
+*/
 
 
-/*
 locals {
 
-  # 1. Filter only Member accounts (excluding Guests)
-  members2 = [
-    for u in data.azuread_users.all.users : u
-    if lower(try(u.user_type, "")) == "member"
+  # 1. Extract Attributes
+  company_raw = [
+    for u in local.members :
+    try(u.companyName, null)
   ]
-  # 3 Extract extensionAttribute
   extension_attribute5_raw = [
     for u in local.members :
     try(u.extension_attributes.extension_attribute5, null)
@@ -51,22 +51,24 @@ locals {
     try(u.extension_attributes.extension_attribute7, null)
   ]
 
-  # 4. Remove null / empty values
+  # 2. Remove null / empty values
+  company_clean = compact(local.company_raw)
   extension_attribute5_clean = compact(local.extension_attribute5_raw)
   extension_attribute6_clean = compact(local.extension_attribute6_raw)
   extension_attribute7_clean = compact(local.extension_attribute7_raw)
 
-  # 5. Deduplicate and sort
+  # 3. Deduplicate and sort
+  unique_commpany = sort(distinct(local.company_clean))
   unique_extension_attribute5 = sort(distinct(local.extension_attribute5_clean))
   unique_extension_attribute6 = sort(distinct(local.extension_attribute6_clean))
   unique_extension_attribute7 = sort(distinct(local.extension_attribute7_clean))
 
   # 6. Turn the list into a set for for_each
+  unique_commpany_set = sort(distinct(local.unique_company))
   unique_extension_attribute5_set = toset(local.unique_extension_attribute5)
   unique_extension_attribute6_set = toset(local.unique_extension_attribute6)
   unique_extension_attribute7_set = toset(local.unique_extension_attribute7)
 }
-*/
 
 /*
 output "list_company_name" {
@@ -87,7 +89,9 @@ output "list_extended_attribute_7" {
 }
 */
 
+/*
 output "all" {
   description = "All Users"
   value = data.msgraph_resource.users.output.all
 }
+*/
