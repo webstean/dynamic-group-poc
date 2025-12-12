@@ -4,7 +4,7 @@ resource "msgraph_resource" "company_dynamic_groups" {
   url = "groups"
   body = {
     displayName     = "Dyn-Company-${each.value}-Members"
-    description     = "Dynamic group for members with department == '${each.value}'"
+    description     = "Dynamic group for enabled members with department == '${each.value}'"
     mailEnabled     = false
     mailNickname    = "dyn-company" ## required even when mail is disabled
     securityEnabled = true
@@ -25,7 +25,7 @@ resource "msgraph_resource" "department_dynamic_groups" {
   url = "groups"
   body = {
     displayName     = "Dyn-Department-${each.value}-Members"
-    description     = "Dynamic group for members with companyName == '${each.value}'"
+    description     = "Dynamic group for enabled members with companyName == '${each.value}'"
     mailEnabled     = false
     mailNickname    = "dyn-department" ## required even when mail is disabled
     securityEnabled = true
@@ -46,7 +46,7 @@ resource "msgraph_resource" "exta5_dynamic_groups" {
   url = "groups"
   body = {
     displayName     = "Dyn-Group-${each.value}-Members"
-    description     = "Dynamic group for enable members accounts with extensionAttribute5 == '${each.value}'"
+    description     = "Dynamic group for enabled members accounts with extensionAttribute5 == '${each.value}'"
     mailEnabled     = false
     mailNickname    = "dyn-exta5" ## required even when mail is disabled
     securityEnabled = true
@@ -67,7 +67,7 @@ resource "msgraph_resource" "exta6_dynamic_groups" {
   url = "groups"
   body = {
     displayName     = "Dyn-Group-${each.value}-Members"
-    description     = "Dynamic group for enable members accounts with extensionAttribute6 == '${each.value}'"
+    description     = "Dynamic group for enabled members accounts with extensionAttribute6 == '${each.value}'"
     mailEnabled     = false
     mailNickname    = "dyn-exta6" ## required even when mail is disabled
     securityEnabled = true
@@ -88,7 +88,7 @@ resource "msgraph_resource" "exta7_dynamic_groups" {
   url = "groups"
   body = {
     displayName     = "Dyn-Group-${each.value}-Members"
-    description     = "Dynamic group for enable members accounts with extensionAttribute7 == '${each.value}'"
+    description     = "Dynamic group for enabled members accounts with extensionAttribute7 == '${each.value}'"
     mailEnabled     = false
     mailNickname    = "dyn-exta7" ## required even when mail is disabled
     securityEnabled = true
