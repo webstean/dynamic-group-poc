@@ -5,7 +5,6 @@ data "msgraph_resource" "users" {
     display_name = "displayName"
     company_name = "companyName"
     city_name = "city"
-
   }
 }
 
