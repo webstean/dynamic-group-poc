@@ -1,6 +1,6 @@
 ### Create Entra ID (Azure AD) Dynamic Groups
 
-resource "azuread_group" "dynamic_P1_license" {
+resource "azuread_group_without_members" "dynamic_P1_license" {
   display_name = "Dynamic-License-All-Enabled-Users-with-atleast-EntraID-P1-license"
   description  = "Users: All enabled users with atleast Entra ID P1 (E3) licensing. Note: This will include the P2 users as well"
   owners = [
@@ -16,7 +16,7 @@ resource "azuread_group" "dynamic_P1_license" {
   }
 }
 
-resource "azuread_group" "dynamic_P2_license" {
+resource "azuread_group_without_members" "dynamic_P2_license" {
   display_name = "Dynamic-License-All-Enabled-Users-with-atleast-EntraID-P2-license"
   description  = "Users: All enabled users with atleast Entra ID P2 (E5) licensing. Note: Most Entra ID saveguards are only available to P1 or above users"
   owners = [
@@ -34,7 +34,7 @@ resource "azuread_group" "dynamic_P2_license" {
 
 // Microsoft Entra Workload ID P1 (84c289f0-efcb-486f-8581-07f44fc9efad)
 // Microsoft Entra Workload ID P2 (7dc0e92d-bf15-401d-907e-0884efe7c760)
-resource "azuread_group" "dynamic_WP1_license" {
+resource "azuread_group_without_members" "dynamic_WP1_license" {
   display_name = "Dynamic-License-All-Enabled-Principles-with-WorkloadID-P1-license"
   description  = "Principles: All enabled principles with Microsoft Entra Workload ID P1 licensing. Note: Most Entra ID conditional access are only available to P1 or above users"
   owners = [
@@ -52,7 +52,7 @@ RULE
   }
 }
 
-resource "azuread_group" "dynamic_WP2_license" {
+resource "azuread_group_without_members" "dynamic_WP2_license" {
   display_name = "Dynamic-License-All-Enabled-Principles-with-WorkloadID-P2-license"
   description  = "Principles: All enabled principles with Microsoft Entra Workload ID P2 licensing. Note: Most Entra ID saveguards are only available to P1 or above users"
   owners = [
@@ -70,7 +70,7 @@ RULE
   }
 }
 
-resource "azuread_group" "dynamic_dynamics_365" {
+resource "azuread_group_without_members" "dynamic_dynamics_365" {
   display_name = "Dynamic-License-All-Enabled-Users-with-either-Dynamics-365-CRM-Professional-or-Enterprise-License"
   description  = "Users: All enabled users with either the Dynamics 365 Sales (CRM) Professional or Enterprise License"
   owners = [
@@ -88,7 +88,7 @@ RULE
   }
 }
 
-resource "azuread_group" "dynamic_dynamics_d365_professional" {
+resource "azuread_group_without_members" "dynamic_dynamics_d365_professional" {
   display_name = "Dynamic-License-All-Enabled-Users-with-Dynamics-365-CRM-Professional"
   description  = "Users: All enabled users with Dynamics 365 Sales (CRM) Professional"
   owners = [
@@ -104,7 +104,7 @@ resource "azuread_group" "dynamic_dynamics_d365_professional" {
   }
 }
 
-resource "azuread_group" "dynamic_dynamics_d365_enterprise" {
+resource "azuread_group_without_members" "dynamic_dynamics_d365_enterprise" {
   display_name = "Dynamic-License-All-Enabled-Users-with-Dynamics-365-CRM-Enterprise"
   description  = "Users: All enabled users with Dynamics 365 Sales (CRM) Enterprise"
   owners = [
@@ -120,7 +120,7 @@ resource "azuread_group" "dynamic_dynamics_d365_enterprise" {
   }
 }
 
-resource "azuread_group" "dynamic_dynamic_dataverse_msteams" {
+resource "azuread_group_without_members" "dynamic_dynamic_dataverse_msteams" {
   display_name = "Dynamic-License-All-Enabled-Users-with-Dataverse-for-MS-Teams"
   description  = "Users: All enabled users with Dataverse for Microsoft Teams"
   owners = [
@@ -138,9 +138,9 @@ RULE
   }
 }
 
-resource "azuread_group" "all_users" {
+resource "azuread_group_without_members" "all_users" {
   display_name = "All-Users"
-  description  = "All Users including guests"
+  description  = "All enabled Users including guests"
   owners = [
     data.azuread_client_config.current.object_id,
   ]
@@ -161,7 +161,7 @@ RULE
   behaviors = ["HideGroupInOutlook", "SubscribeMembersToCalendarEventsDisabled", "WelcomeEmailDisabled"]
 }
 
-resource "azuread_group" "dynamic_all_guest_users" {
+resource "azuread_group_without_members" "dynamic_all_guest_users" {
   display_name = "Dynamic-Users-All-Guests"
   description  = "Users: All Enabled Guest Users"
   owners = [
@@ -179,7 +179,7 @@ RULE
   }
 }
 
-resource "azuread_group" "dynamic_all_users" {
+resource "azuread_group_without_members" "dynamic_all_users" {
   display_name = "Dynamic-Users-All"
   description  = "Users: All enabled users (members and guests)"
   owners = [
@@ -197,7 +197,7 @@ RULE
   }
 }
 
-resource "azuread_group" "dynamic_all_users_never_expire" {
+resource "azuread_group_without_members" "dynamic_all_users_never_expire" {
   display_name = "Dynamic-Users-All-With-Password-Never-Expires"
   description  = "Users: All enabled users (members and guests)"
   owners = [
@@ -214,7 +214,4 @@ resource "azuread_group" "dynamic_all_users_never_expire" {
 RULE
   }
 }
-
-
-
 
