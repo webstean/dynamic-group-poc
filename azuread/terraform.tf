@@ -24,12 +24,12 @@ terraform {
       version = "~>3.0, < 4.0"
     }
   }
-  backend "azurerm" {
-    resource_group_name  = "andrewwebster"
-    storage_account_name = "tfwqaesdfghfd"
-    container_name       = "tfstate"
-    key                  = "dtp-dynamic-group-poc"
-  }
+#  backend "azurerm" {
+#    resource_group_name  = "andrewwebster"
+#    storage_account_name = "tfwqaesdfghfd"
+#    container_name       = "tfstate"
+#    key                  = "dtp-dynamic-group-poc"
+#  }
 }
 
 provider "azurerm" {
