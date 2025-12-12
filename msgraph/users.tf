@@ -60,6 +60,10 @@ locals {
   unique_extension_attribute7_set = toset(local.unique_extension_attribute7)
 }
 
+output "members" {
+  value = local.members
+}
+
 output "company_raw" {
   description = "List of all unique Company Names in the Entra ID Tenacy from all enabled member accounts"
   value = local.company_raw
