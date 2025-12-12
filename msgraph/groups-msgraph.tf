@@ -61,3 +61,45 @@ RULE
   }
 }
 
+resource "msgraph_resource" "exta6_dynamic_groups" {
+  for_each = local.unique_extension_attribute6_set
+
+  url = "groups"
+  body = {
+    displayName     = "Dyn-Group-${each.value}-Members"
+    description     = "Dynamic group for enable members accounts with extensionAttribute6 == '${each.value}'"
+    mailEnabled     = false
+    mailNickname    = "dyn-exta5" ## required even when mail is disabled
+    securityEnabled = true
+    "owners@odata.bind" = [
+      "https://graph.microsoft.com/v1.0/servicePrincipals/${data.azurerm_client_config.current.object_id}",
+    ]
+    groupTypes = ["DynamicMembership"]
+    membershipRule = <<RULE
+(user.accountEnabled -eq true) and (user.userType -eq "Member") and (user.extensionAttribute6 -eq "${each.value}")
+RULE
+    membershipRuleProcessingState = "On"
+  }
+}
+
+resource "msgraph_resource" "exta7_dynamic_groups" {
+  for_each = local.unique_extension_attribute7_set
+
+  url = "groups"
+  body = {
+    displayName     = "Dyn-Group-${each.value}-Members"
+    description     = "Dynamic group for enable members accounts with extensionAttribute7 == '${each.value}'"
+    mailEnabled     = false
+    mailNickname    = "dyn-exta5" ## required even when mail is disabled
+    securityEnabled = true
+    "owners@odata.bind" = [
+      "https://graph.microsoft.com/v1.0/servicePrincipals/${data.azurerm_client_config.current.object_id}",
+    ]
+    groupTypes = ["DynamicMembership"]
+    membershipRule = <<RULE
+(user.accountEnabled -eq true) and (user.userType -eq "Member") and (user.extensionAttribute7 -eq "${each.value}")
+RULE
+    membershipRuleProcessingState = "On"
+  }
+}
+
