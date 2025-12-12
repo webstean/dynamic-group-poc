@@ -1,4 +1,4 @@
-name: 'Terraform - azurerm Plan/Apply'
+name: 'Terraform - azuread Plan/Apply'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -16,7 +16,7 @@ permissions:
   pull-requests: write
 
 env:
-  WORKING_DIRECTORY: ./azurerm
+  WORKING_DIRECTORY: ./azuread
   ## Terraform Debugging
   ## TRACE, DEBUG, INFO, WARN, ERROR
   #TF_LOG = "WARN"
