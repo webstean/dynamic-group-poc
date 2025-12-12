@@ -13,7 +13,7 @@ data "msgraph_resource" "users" {
 }
 
 locals {
-  # Cleanup Query output into local variable
+  # Cleanup query output and put into a local variable
   members = try(
     flatten([
       for item in data.msgraph_resource.users :
@@ -22,11 +22,8 @@ locals {
     ]),
     []
   )
-#  members = [
-#    for u in data.msgraph_resource.users : u
-#  ]
 
-  # 1. Extract Attributes
+  # 1. Extract desirbed attributes
   company_raw = [
     for u in local.members :
     u.companyName
@@ -39,18 +36,18 @@ locals {
   ]
   extension_attribute5_raw = [
     for u in local.members :
-    u.users.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute5
-    if try(u.users.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute5, null) != null
+    u.onPremisesExtensionAttributes.extension_attribute5
+    if try(u.onPremisesExtensionAttributes.extension_attribute5, null) != null
   ]
   extension_attribute6_raw = [
     for u in local.members :
-    u.users.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute6
-    if try(u.users.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute6, null) != null
+    u.onPremisesExtensionAttributes.extension_attribute6
+    if try(u.onPremisesExtensionAttributes.extension_attribute6, null) != null
   ]
   extension_attribute7_raw = [
     for u in local.members :
-    u.users.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute7
-    if try(u.users.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute7, null) != null
+    u.onPremisesExtensionAttributes.extension_attribute7
+    if try(u.onPremisesExtensionAttributes.extension_attribute7, null) != null
   ]
 
   # 2. Remove null / empty values
@@ -76,16 +73,17 @@ locals {
 }
 
 /*
+## Debugging
 output "members" {
   value = local.members
 }
 */
 
-output "list_company_name" {
+output "list_company_names" {
   description = "List of all unique Company Names in the Entra ID Tenacy from all enabled member accounts"
   value = local.unique_company_set
 }
-output "list_departmemt" {
+output "list_departmemts" {
   description = "List of all unique Department names in the Entra ID Tenacy from all enabled member accounts"
   value = local.unique_department_set
 }
