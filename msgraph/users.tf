@@ -23,7 +23,7 @@ locals {
     []
   )
 
-  # 1. Extract desirbed attributes
+  # 1. Extract desired attributes into new local variables
   company_raw = [
     for u in local.members :
     u.companyName
