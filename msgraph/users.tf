@@ -1,4 +1,4 @@
-data "msgraph_resource" "usersa" {
+data "msgraph_resource" "users" {
   url = "users"
   response_export_values = {
     all          = "@"
@@ -7,10 +7,12 @@ data "msgraph_resource" "usersa" {
   }
 }
 
-output "display_namea" {
-  value = data.msgraph_resource.usersa.output.display_name
+output "display_names" {
+  description = "All Display Names"
+  value = data.msgraph_resource.users.output.display_name
 }
 
 output "all" {
-  value = data.msgraph_resource.usersa.output.all
+  description = "All Users"
+  value = data.msgraph_resource.users.output.all
 }
