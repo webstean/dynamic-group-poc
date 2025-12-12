@@ -40,7 +40,6 @@ RULE
   }
 }
 
-/*
 resource "msgraph_resource" "exta5_dynamic_groups" {
   for_each = local.unique_extension_attribute5_set
 
@@ -56,9 +55,9 @@ resource "msgraph_resource" "exta5_dynamic_groups" {
     ]
     groupTypes = ["DynamicMembership"]
     membershipRule = <<RULE
-
+(user.accountEnabled -eq true) and (user.userType -eq "Member") and (user.extensionAttribute6 -eq "${each.value}")
 RULE
     membershipRuleProcessingState = "On"
   }
 }
-*/
+
