@@ -16,7 +16,7 @@ permissions:
   pull-requests: write
 
 env:
-  WORKING_DIRECTORY: ./terraform
+  WORKING_DIRECTORY: ./azurerm
   ## Terraform Debugging
   ## TRACE, DEBUG, INFO, WARN, ERROR
   #TF_LOG = "WARN"
