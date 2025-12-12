@@ -6,7 +6,6 @@ resource "msgraph_resource" "company_dynamic_groups" {
     displayName     = "Dyn-Company-${each.value}-Members"
     description     = "Dynamic group for members with companyName == '${each.value}'"
     mailEnabled     = false
-    mailNickname    = "dyn-company"
     securityEnabled = true
     "owners@odata.bind" = [
       "https://graph.microsoft.com/v1.0//servicePrincipals/${data.azurerm_client_config.current.object_id}",
