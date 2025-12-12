@@ -1,4 +1,4 @@
-name: 'Terraform - azuread DESTROY'
+name: 'Terraform - azuread **DESTROY**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -52,24 +52,25 @@ jobs:
       ## Terraform Init
       - name: 🔍 Terraform Init
         run: |
+            export exitcode=0
             terraform \
             -chdir=${{ env.WORKING_DIRECTORY }} init -upgrade
-##          -backend-config="resource_group_name=${TFSTATE_RESOURCE_GROUP_NAME}" \
-##          -backend-config="storage_account_name=${TFSTATE_STORAGE_ACCOUNT_NAME}" \
-##          -backend-config="container_name=tfstate" \
-##          -backend-config="key=tf-state-${{ env.WORKING_DIRECTORY }}"
+##            -backend-config="resource_group_name=${TFSTATE_RESOURCE_GROUP_NAME}" \
+##            -backend-config="storage_account_name=${TFSTATE_STORAGE_ACCOUNT_NAME}" \
+##            -backend-config="container_name=tfstate" \
+##            -backend-config="key=tf-state-${{ env.WORKING_DIRECTORY }}"
 
       - name: ⚙️ Terraform Destroy
         run: |
-          export exitcode=0
-          terraform \
-            -chdir=${{ env.WORKING_DIRECTORY }} plan destory -auto-approve
-          echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
-          if [ $exitcode -eq 1 ]; then
-            echo Terraform DESTROY Failed!
-            exit 1
-          else 
-            echo Terraform DESTROY Succeeded
-            exit 0
-          fi
+            export exitcode=0
+            terraform \
+              -chdir=${{ env.WORKING_DIRECTORY }} apply destroy -auto-approve
+            echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
+            if [ $exitcode -eq 1 ]; then
+              echo Terraform DESTROY Failed!
+              exit 1
+            else 
+              echo Terraform DESTROY Succeeded
+              exit 0
+            fi
 
