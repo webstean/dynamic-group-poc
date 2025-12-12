@@ -4,7 +4,7 @@ resource "msgraph_resource" "company_dynamic_groups" {
   url = "groups"
   body = {
     displayName     = "Dyn-Company-${each.value}-Members"
-    description     = "Dynamic group for members with companyName == '${each.value}'"
+    description     = "Dynamic group for members with department == '${each.value}'"
     mailEnabled     = false
     securityEnabled = true
     "owners@odata.bind" = [
