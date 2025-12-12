@@ -10,7 +10,6 @@ resource "msgraph_resource" "company_dynamic_groups" {
     securityEnabled = true
     "owners@odata.bind" = [
       "https://graph.microsoft.com/v1.0/servicePrincipals/${data.azurerm_client_config.current.object_id}",
-      "https://graph.microsoft.com/v1.0/servicePrincipals/c5393580-f805-4401-95e8-94b7a6ef2fc2",
     ]
     groupTypes = ["DynamicMembership"]
     membershipRule = <<RULE
@@ -32,7 +31,6 @@ resource "msgraph_resource" "department_dynamic_groups" {
     securityEnabled = true
     "owners@odata.bind" = [
       "https://graph.microsoft.com/v1.0/servicePrincipals/${data.azurerm_client_config.current.object_id}",
-      "https://graph.microsoft.com/v1.0/servicePrincipals/c5393580-f805-4401-95e8-94b7a6ef2fc2",
     ]
     groupTypes = ["DynamicMembership"]
     membershipRule = <<RULE
@@ -54,7 +52,6 @@ resource "msgraph_resource" "exta5_dynamic_groups" {
     securityEnabled = true
     "owners@odata.bind" = [
       "https://graph.microsoft.com/v1.0/servicePrincipals/${data.azurerm_client_config.current.object_id}",
-      "https://graph.microsoft.com/v1.0/servicePrincipals/c5393580-f805-4401-95e8-94b7a6ef2fc2",
     ]
     groupTypes = ["DynamicMembership"]
     membershipRule = <<RULE
@@ -76,7 +73,6 @@ resource "msgraph_resource" "exta6_dynamic_groups" {
     securityEnabled = true
     "owners@odata.bind" = [
       "https://graph.microsoft.com/v1.0/servicePrincipals/${data.azurerm_client_config.current.object_id}",
-      "https://graph.microsoft.com/v1.0/servicePrincipals/c5393580-f805-4401-95e8-94b7a6ef2fc2",
     ]
     groupTypes = ["DynamicMembership"]
     membershipRule = <<RULE
@@ -98,7 +94,6 @@ resource "msgraph_resource" "exta7_dynamic_groups" {
     securityEnabled = true
     "owners@odata.bind" = [
       "https://graph.microsoft.com/v1.0/servicePrincipals/${data.azurerm_client_config.current.object_id}",
-      "https://graph.microsoft.com/v1.0/servicePrincipals/c5393580-f805-4401-95e8-94b7a6ef2fc2",
     ]
     groupTypes = ["DynamicMembership"]
     membershipRule = <<RULE
