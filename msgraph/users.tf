@@ -7,7 +7,7 @@ data "msgraph_resource" "users" {
   }
 }
 
-output "display_name" {
+output "display_namea" {
   value = data.msgraph_resource.users.output.display_name
 }
 
