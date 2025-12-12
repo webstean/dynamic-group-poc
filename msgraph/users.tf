@@ -22,22 +22,27 @@ locals {
   # 1. Extract Attributes
   company_raw = [
     for u in local.members :
+    u.all.companyName
     if try(u.all.companyName, null) != null
   ]
   department_raw = [
     for u in local.members :
+    u.all.department
     if try(u.all.department, null) != null
   ]
   extension_attribute5_raw = [
     for u in local.members :
+    u.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute5
     if try(u.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute5, null) != null
   ]
   extension_attribute6_raw = [
     for u in local.members :
+    u.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute6
     if try(u.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute6, null) != null
   ]
   extension_attribute7_raw = [
     for u in local.members :
+    u.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute7
     if try(u.all.onPremisesExtensionAttributes.extension_attributes.extension_attribute7, null) != null
   ]
 
