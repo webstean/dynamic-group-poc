@@ -67,23 +67,18 @@ locals {
   unique_extension_attribute7_set = toset(local.unique_extension_attribute7)
 }
 
-/*
 output "members" {
   value = local.members
 }
-*/
 
-output "list_company" {
+/*
+output "list_company_name" {
   description = "List of all unique Company Names in the Entra ID Tenacy from all enabled member accounts"
   value = local.unique_company_set
 }
 output "list_departmemt" {
   description = "List of all unique Department names in the Entra ID Tenacy from all enabled member accounts"
   value = local.unique_department_set
-}
-output "list_company_name" {
-  description = "List of all unique Company Names in the Entra ID Tenacy from all enabled member accounts"
-  value = local.unique_company_set
 }
 output "list_extended_attribute_5" {
   description = "List of all unique extensionAttribute5 in the Entra ID Tenacy from all enabled member accounts"
@@ -97,4 +92,4 @@ output "list_extended_attribute_7" {
   description = "List of all unique extensionAttribute7 in the Entra ID Tenacy from all enabled member accounts"
   value = local.unique_extension_attribute7_set 
 }
-
+*/
