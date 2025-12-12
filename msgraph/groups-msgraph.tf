@@ -69,7 +69,7 @@ resource "msgraph_resource" "exta6_dynamic_groups" {
     displayName     = "Dyn-Group-${each.value}-Members"
     description     = "Dynamic group for enable members accounts with extensionAttribute6 == '${each.value}'"
     mailEnabled     = false
-    mailNickname    = "dyn-exta5" ## required even when mail is disabled
+    mailNickname    = "dyn-exta6" ## required even when mail is disabled
     securityEnabled = true
     "owners@odata.bind" = [
       "https://graph.microsoft.com/v1.0/servicePrincipals/${data.azurerm_client_config.current.object_id}",
@@ -90,7 +90,7 @@ resource "msgraph_resource" "exta7_dynamic_groups" {
     displayName     = "Dyn-Group-${each.value}-Members"
     description     = "Dynamic group for enable members accounts with extensionAttribute7 == '${each.value}'"
     mailEnabled     = false
-    mailNickname    = "dyn-exta5" ## required even when mail is disabled
+    mailNickname    = "dyn-exta7" ## required even when mail is disabled
     securityEnabled = true
     "owners@odata.bind" = [
       "https://graph.microsoft.com/v1.0/servicePrincipals/${data.azurerm_client_config.current.object_id}",
