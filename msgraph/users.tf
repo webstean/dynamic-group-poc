@@ -15,7 +15,7 @@ data "msgraph_resource" "users" {
 locals {
   # Query output into local variable
   members = [
-    for u in data.msgraph_resource.users : u
+    for u in data.msgraph_resource.users.users.all : u
   ]
 
   # 1. Extract Attributes
