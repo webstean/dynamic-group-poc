@@ -46,7 +46,7 @@ resource "msgraph_resource" "exta5_dynamic_groups" {
   url = "groups"
   body = {
     displayName     = "Dyn-Group-${each.value}-Members"
-    description     = "Dynamic group for enable members account with extensionAttribute5 == '${each.value}'"
+    description     = "Dynamic group for enable members accounts with extensionAttribute5 == '${each.value}'"
     mailEnabled     = false
     mailNickname    = "dyn-exta5" ## required even when mail is disabled
     securityEnabled = true
@@ -55,7 +55,7 @@ resource "msgraph_resource" "exta5_dynamic_groups" {
     ]
     groupTypes = ["DynamicMembership"]
     membershipRule = <<RULE
-(user.accountEnabled -eq true) and (user.userType -eq "Member") and (user.extensionAttribute6 -eq "${each.value}")
+(user.accountEnabled -eq true) and (user.userType -eq "Member") and (user.extensionAttribute5 -eq "${each.value}")
 RULE
     membershipRuleProcessingState = "On"
   }
