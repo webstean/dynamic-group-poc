@@ -17,7 +17,7 @@ permissions:
   pull-requests: write
 
 env:
-  WORKING_DIRECTORY: ./msgraph
+  WORKING_DIRECTORY: msgraph
   ## Terraform Debugging
   ## TRACE, DEBUG, INFO, WARN, ERROR
   #TF_LOG = "WARN"
@@ -60,7 +60,7 @@ jobs:
 #      - name: 🔍 Terraform Format
 #        run: |
 #              terraform \
-#              -chdir=${{ env.WORKING_DIRECTORY }} fmt -check
+#              -chdir=./${{ env.WORKING_DIRECTORY }} fmt -check
 #        continue-on-error: true
     
       ## Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
@@ -68,7 +68,7 @@ jobs:
       - name: 🔍 Terraform Init
         run: |
             terraform \
-            -chdir=${{ env.WORKING_DIRECTORY }} init -upgrade -input=false \
+            -chdir=./${{ env.WORKING_DIRECTORY }} init -upgrade -input=false \
             -backend-config="resource_group_name=${{ secrets.TFSTATE_RESOURCE_GROUP_NAME }}" \
             -backend-config="storage_account_name=${{ secrets.TFSTATE_STORAGE_ACCOUNT_NAME }}" \
             -backend-config="container_name=${GITHUB_REPOSITORY}" \
@@ -80,7 +80,7 @@ jobs:
         id: tf-plan
         run: |
           export exitcode=0
-          terraform -chdir=${{ env.WORKING_DIRECTORY }} plan -detailed-exitcode -no-color -out tfplan-${{ matrix.runs-on }}.tfplan || export exitcode=$?
+          terraform -chdir=./${{ env.WORKING_DIRECTORY }} plan -detailed-exitcode -no-color -out tfplan-${{ matrix.runs-on }}.tfplan || export exitcode=$?
           echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
         
           if [ $exitcode -eq 1 ]; then
@@ -111,7 +111,7 @@ jobs:
           echo "<details><summary>Click to expand</summary>" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo '```terraform' >> $GITHUB_STEP_SUMMARY
-          terraform -chdir=${{ env.WORKING_DIRECTORY }} show -no-color tfplan-${{ matrix.runs-on }}.tfplan >> $GITHUB_STEP_SUMMARY
+          terraform -chdir=./${{ env.WORKING_DIRECTORY }} show -no-color tfplan-${{ matrix.runs-on }}.tfplan >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           echo "</details>" >> $GITHUB_STEP_SUMMARY
                 
@@ -142,7 +142,7 @@ jobs:
     - name: Terraform Init
       run: |
         terraform \
-        -chdir=${{ env.WORKING_DIRECTORY }} init -upgrade \
+        -chdir=./${{ env.WORKING_DIRECTORY }} init -upgrade -input=false \
         -backend-config="resource_group_name=${{ secrets.TFSTATE_RESOURCE_GROUP_NAME }}" \
         -backend-config="storage_account_name=${{ secrets.TFSTATE_STORAGE_ACCOUNT_NAME }}" \
         -backend-config="container_name=${GITHUB_REPOSITORY}" \
@@ -160,5 +160,5 @@ jobs:
       run: |
         export exitcode=0
         terraform \
-        -chdir=${{ env.WORKING_DIRECTORY }} apply -auto-approve tfplan-${{ matrix.runs-on }}.tfplan
+        -chdir=./${{ env.WORKING_DIRECTORY }} apply -auto-approve tfplan-${{ matrix.runs-on }}.tfplan
         echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
