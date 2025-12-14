@@ -4,12 +4,12 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
 on:
-  [workflow_dispatch]
   push:
     branches:
       - main
     paths:
       - 'azuread/*.tf'
+  workflow_dispatch:
 
 permissions:
   id-token: write
