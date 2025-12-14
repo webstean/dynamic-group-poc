@@ -8,7 +8,7 @@ terraform {
       version = "~>4.0, < 5.0"
     }
     msgraph = {
-      ## Microsoft Graph - replacement for azuread *future*
+      ## Microsoft Graph
       source  = "Microsoft/msgraph"
       version = "~> 0.0, < 1.0"
     }
