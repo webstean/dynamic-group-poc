@@ -9,6 +9,7 @@ on:
       - main
     paths:
       - 'msgraph/*.tf'
+  workflow_dispatch:
 
 permissions:
   id-token: write
