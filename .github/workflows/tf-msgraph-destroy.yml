@@ -12,7 +12,7 @@ permissions:
   pull-requests: read
 
 env:
-  WORKING_DIRECTORY: ./msgraph
+  WORKING_DIRECTORY: msgraph
   ## Terraform Debugging
   ## TRACE, DEBUG, INFO, WARN, ERROR
   #TF_LOG = "WARN"
@@ -54,17 +54,17 @@ jobs:
         run: |
             export exitcode=0
             terraform \
-            -chdir=${{ env.WORKING_DIRECTORY }} init -upgrade
-##            -backend-config="resource_group_name=${TFSTATE_RESOURCE_GROUP_NAME}" \
-##            -backend-config="storage_account_name=${TFSTATE_STORAGE_ACCOUNT_NAME}" \
-##            -backend-config="container_name=${GITHUB_REPOSITORY}" \
-##            -backend-config="key=tf-state-${{ env.WORKING_DIRECTORY }}"
+            -chdir=./${{ env.WORKING_DIRECTORY }} init -upgrade -
+            -backend-config="resource_group_name=${TFSTATE_RESOURCE_GROUP_NAME}" \
+            -backend-config="storage_account_name=${TFSTATE_STORAGE_ACCOUNT_NAME}" \
+            -backend-config="container_name=${GITHUB_REPOSITORY}" \
+            -backend-config="key=tf-state-${{ env.WORKING_DIRECTORY }}"
 
       - name: ⚙️ Terraform Destroy
         run: |
             export exitcode=0
             terraform \
-              -chdir=${{ env.WORKING_DIRECTORY }} apply -destroy -auto-approve
+              -chdir=./${{ env.WORKING_DIRECTORY }} apply -destroy -auto-approve
             echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
             if [ $exitcode -eq 1 ]; then
               echo Terraform DESTROY Failed!
