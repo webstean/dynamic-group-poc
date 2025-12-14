@@ -57,11 +57,11 @@ jobs:
           terraform_version: latest 
     
       ## Fix format of Terraform configuration files to adhere to a canonical format
-      - name: 🔍 Terraform Format
-        run: |
-              terraform \
-              -chdir=${{ env.WORKING_DIRECTORY }} fmt -check
-        continue-on-error: true
+#      - name: 🔍 Terraform Format
+#        run: |
+#              terraform \
+#              -chdir=${{ env.WORKING_DIRECTORY }} fmt -check
+#        continue-on-error: true
     
       ## Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       ## variables: TFSTATE_RESOURCE_GROUP_NAME, TFSTATE_STORAGE_ACCOUNT_NAME, TFSTATE_CONTAINER_NAME
