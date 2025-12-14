@@ -1,4 +1,4 @@
-resource "msgraph_resource" "company_dynamic_groups" {
+resource "msgraph_resource" "company_dynamic_security_groups" {
   for_each = local.unique_company_set
 
   url = "groups"
@@ -19,7 +19,7 @@ RULE
   }
 }
 
-resource "msgraph_resource" "department_dynamic_groups" {
+resource "msgraph_resource" "department_dynamic_security_groups" {
   for_each = local.unique_department_set
 
   url = "groups"
@@ -40,7 +40,7 @@ RULE
   }
 }
 
-resource "msgraph_resource" "exta5_dynamic_groups" {
+resource "msgraph_resource" "exta5_dynamic_security_groups" {
   for_each = local.unique_extension_attribute5_set
 
   url = "groups"
@@ -61,7 +61,7 @@ RULE
   }
 }
 
-resource "msgraph_resource" "exta6_dynamic_groups" {
+resource "msgraph_resource" "exta6_dynamic_security_groups" {
   for_each = local.unique_extension_attribute6_set
 
   url = "groups"
@@ -82,7 +82,7 @@ RULE
   }
 }
 
-resource "msgraph_resource" "exta7_dynamic_groups" {
+resource "msgraph_resource" "exta7_dynamic_security_groups" {
   for_each = local.unique_extension_attribute7_set
 
   url = "groups"
