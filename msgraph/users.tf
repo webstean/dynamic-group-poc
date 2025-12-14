@@ -1,7 +1,7 @@
 data "msgraph_resource" "users" {
   url = "users"
   query_parameters = {
-    "$select" = ["givenName", "surname", "department", "companyName", "onPremisesExtensionAttributes"]
+    "$select" = ["department", "companyName", "onPremisesExtensionAttributes"]
     "$filter" = [
        "accountEnabled eq true and userType eq 'Member'",
     ]
