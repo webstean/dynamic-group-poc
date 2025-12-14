@@ -20,7 +20,7 @@ provider "azurerm" {
   resource_provider_registrations = "none"
   use_aks_workload_identity = false
   use_msi                   = false
-  # Authentication strategy: Using OIDC (GitHub Actions) and Azure CLI (interactive) for authentication to Azure AD tenant.
+  ## Authentication strategy: Using OIDC (GitHub Actions) and Azure CLI (interactive) for authentication to Azure AD tenant.
   use_oidc = true
   use_cli  = true
 }
@@ -28,7 +28,7 @@ provider "azurerm" {
 provider "msgraph" {
   use_aks_workload_identity = false
   use_msi                   = false
-  # Authentication strategy: Using OIDC (GitHub Actions) and Azure CLI (interactive) for authentication to Azure AD tenant.
+  ## Authentication strategy: Using OIDC (GitHub Actions) and Azure CLI (interactive) for authentication to Azure AD tenant.
   use_oidc = true
   use_cli  = true
 }
