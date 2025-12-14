@@ -14,7 +14,7 @@ terraform {
       version = "~>3.0, < 4.0"
     }
     msgraph = {
-      ## Microsoft Graph - replacement for azuread *future*
+      ## Microsoft Graph
       source  = "Microsoft/msgraph"
       version = "~> 0.0, < 1.0"
     }
@@ -24,12 +24,6 @@ terraform {
       version = "~>3.0, < 4.0"
     }
   }
-#  backend "azurerm" {
-#    resource_group_name  = "andrewwebster"
-#    storage_account_name = "tfwqaesdfghfd"
-#    container_name       = "tfstate"
-#    key                  = "dtp-dynamic-group-poc"
-#  }
 }
 
 provider "azurerm" {
@@ -45,7 +39,7 @@ provider "azurerm" {
 provider "azuread" {
   use_aks_workload_identity = false
   use_msi                   = false
-  # Authentication strategy: Using OIDC (GitHub Actions) and Azure CLI (interactive) for authentication to Azure AD tenant.
+  ## Authentication strategy: Using OIDC (GitHub Actions) and Azure CLI (interactive) for authentication to Azure AD tenant.
   use_oidc = true
   use_cli  = true
 }
@@ -53,7 +47,7 @@ provider "azuread" {
 provider "msgraph" {
   use_aks_workload_identity = false
   use_msi                   = false
-  # Authentication strategy: Using OIDC (GitHub Actions) and Azure CLI (interactive) for authentication to Azure AD tenant.
+  ## Authentication strategy: Using OIDC (GitHub Actions) and Azure CLI (interactive) for authentication to Azure AD tenant.
   use_oidc = true
   use_cli  = true
 }
