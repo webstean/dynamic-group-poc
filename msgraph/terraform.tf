@@ -13,12 +13,6 @@ terraform {
       version = "~> 0.0, < 1.0"
     }
   }
-#  backend "azurerm" {
-#    resource_group_name  = "andrewwebster"
-#    storage_account_name = "tfwqaesdfghfd"
-#    container_name       = "tfstate"
-#    key                  = "dynamic-group-poc-msgraph"
-#  }
 }
 
 provider "azurerm" {
