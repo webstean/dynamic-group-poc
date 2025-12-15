@@ -60,7 +60,7 @@ jobs:
             -backend-config="container_name=${{ github.event.repository.name }}" \
             -backend-config="key=tf-state-${{ env.WORKING_DIRECTORY }}"
 
-      - name: ⚙️ Terraform Destroy
+      - name: 💥 Terraform Destroy
         run: |
             export exitcode=0
             terraform \
