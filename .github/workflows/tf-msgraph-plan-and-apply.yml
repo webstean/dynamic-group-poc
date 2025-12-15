@@ -42,7 +42,7 @@ jobs:
 
     steps:
       ## Checkout the repository
-      - name: ⚙️ Checkout
+      - name: 🧬 Checkout
         uses: actions/checkout@v4
         with: 
           # super-linter needs the full git history to get the
@@ -76,7 +76,7 @@ jobs:
 
       ## Generates an Terraform plan
       ## An exit code of 0 indicated no changes, 1 a terraform failure, 2 there are pending changes.
-      - name: ⚙️ Terraform Plan
+      - name: 🛠️ Terraform Plan
         id: tf-plan
         run: |
           export exitcode=0
@@ -128,18 +128,18 @@ jobs:
     steps:
 
     ## Checkout the repository to the GitHub Actions runner
-    - name: 'Checkout'
+    - name: 🧬 Checkout
       uses: actions/checkout@v4
 
     ## Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
-    - name: 'Setup Terraform'
+    - name: ⚙️ Setup Terraform
       uses: hashicorp/setup-terraform@v3
       with:
         terraform_wrapper: false
         terraform_version: latest
 
     ## Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-    - name: Terraform Init
+    - name: 🔍 Terraform Init
       run: |
         terraform \
         -chdir=./${{ env.WORKING_DIRECTORY }} init -upgrade -input=false \
