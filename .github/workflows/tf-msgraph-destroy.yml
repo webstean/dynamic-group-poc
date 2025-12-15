@@ -35,7 +35,7 @@ jobs:
 
     steps:
       ## Checkout the repository
-      - name: ⚙️ Checkout
+      - name: 🧬 Checkout
         uses: actions/checkout@v4
         with: 
           # super-linter needs the full git history to get the
