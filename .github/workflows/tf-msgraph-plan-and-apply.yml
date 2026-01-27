@@ -63,6 +63,19 @@ jobs:
 #              terraform \
 #              -chdir=./${{ env.WORKING_DIRECTORY }} fmt -check
 #        continue-on-error: true
+
+      ## Install and setup Terraform
+      #- name: ⚙️ Logon to Azure (to create storage container, if required)
+      #  uses: hashicorp/setup-terraform@v3
+      #  with:
+      #    terraform_wrapper: false
+      #    terraform_version: latest
+      # run: |
+      #    # Use az storage container create — it’s idempotent and safe to run repeatedly.
+      #    az storage container create \
+      #      --account-name "${{ secrets.TFSTATE_STORAGE_ACCOUNT_NAME }}" \
+      #      --name "${{ github.event.repository.name }}" \
+       #     --account-key "key=tf-state-${{ env.WORKING_DIRECTORY }}"
     
       ## Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       ## variables: TFSTATE_RESOURCE_GROUP_NAME, TFSTATE_STORAGE_ACCOUNT_NAME, TFSTATE_CONTAINER_NAME
