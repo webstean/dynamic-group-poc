@@ -23,7 +23,8 @@ env:
   ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   ARM_USE_OIDC: "true"
   ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-  TF_VAR_upn: ${{ secrets.ANDREW_UPN }}  
+  TF_VAR_upn: ${{ secrets.ANDREW_UPN }}
+  TF_VAR_git_secret: ${{ secrets.GH_ADMIN_TOKEN }} ## GitHub token to manage secrets
 
 jobs:
   terraform-destroy:
