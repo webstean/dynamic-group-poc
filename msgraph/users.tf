@@ -57,12 +57,27 @@ locals {
   extension_attribute6_clean = compact(local.extension_attribute6_raw)
   extension_attribute7_clean = compact(local.extension_attribute7_raw)
 
-  # 3. Deduplicate and sort
-  unique_company = sort(distinct(local.company_clean))
-  unique_department = sort(distinct(local.department_clean))
-  unique_extension_attribute5 = sort(distinct(local.extension_attribute5_clean))
-  unique_extension_attribute6 = sort(distinct(local.extension_attribute6_clean))
-  unique_extension_attribute7 = sort(distinct(local.extension_attribute7_clean))
+  # 3. Deduplicate and sort (case-insensitive)
+  unique_company = sort(distinct([
+      for v in local.company_clean :
+      lower(trimspace(v))
+  ]))
+  unique_department = sort(distinct([
+      for v in local.department_clean :
+      lower(trimspace(v))
+  ]))
+  unique_extension_attribute5 = sort(distinct([
+      for v in local.extension_attribute5_clean :
+      lower(trimspace(v))
+  ]))
+  unique_extension_attribute6 = sort(distinct([
+      for v in local.extension_attribute6_clean :
+      lower(trimspace(v))
+  ]))
+  unique_extension_attribute7 = sort(distinct([
+      for v in local.extension_attribute7_clean :
+      lower(trimspace(v))
+  ]))
 
   # 4. Turn the list into a set for for_each
   unique_company_set = toset(local.unique_company)
