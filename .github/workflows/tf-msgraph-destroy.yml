@@ -12,7 +12,7 @@ permissions:
   pull-requests: read
 
 env:
-  WORKING_DIRECTORY: msgraph
+  WORKING_DIRECTORY: .\msgraph
   ## Terraform Debugging
   ## TRACE, DEBUG, INFO, WARN, ERROR
   #TF_LOG = "WARN"
@@ -37,7 +37,7 @@ jobs:
     steps:
       ## Checkout the repository
       - name: 🧬 Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with: 
           # super-linter needs the full git history to get the
           # list of files that changed across commits
@@ -45,7 +45,7 @@ jobs:
 
       ## Install and setup Terraform
       - name: ⚙️ Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+        uses: hashicorp/setup-terraform@v4
         with:
           terraform_wrapper: false
           terraform_version: latest 
@@ -55,7 +55,7 @@ jobs:
         run: |
             export exitcode=0
             terraform \
-              -chdir=./${{ env.WORKING_DIRECTORY }} init -upgrade -input=false \
+              -chdir=${{ env.WORKING_DIRECTORY }} init -upgrade -input=false \
               -backend-config="resource_group_name=${{ secrets.TFSTATE_RESOURCE_GROUP_NAME }}" \
               -backend-config="storage_account_name=${{ secrets.TFSTATE_STORAGE_ACCOUNT_NAME }}" \
               -backend-config="container_name=${{ github.event.repository.name }}" \
@@ -65,7 +65,7 @@ jobs:
         run: |
             export exitcode=0
             terraform \
-              -chdir=./${{ env.WORKING_DIRECTORY }} apply -destroy -auto-approve
+              -chdir=${{ env.WORKING_DIRECTORY }} apply -destroy -auto-approve
             echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
             if [ $exitcode -eq 1 ]; then
               echo Terraform DESTROY Failed!
