@@ -78,11 +78,15 @@ jobs:
       - name: 🔍 Terraform Init
         run: |
             export exitcode=0
+            set -euo pipefail
+            working_directory="${{ env.WORKING_DIRECTORY }}"
+            working_directory_clean="${working_directory#./}"
+    
             terraform -chdir=./${{ env.WORKING_DIRECTORY }} init -upgrade -input=false \
               -backend-config use_azuread_auth=true \
               -backend-config="storage_account_name=${{ secrets.TFSTATE_STORAGE_ACCOUNT_NAME }}" \
               -backend-config="container_name=${{ github.event.repository.name }}" \
-              -backend-config="key=tf-state-${trimprefix(${{ env.WORKING_DIRECTORY }}}, "./")"
+              -backend-config="key=tf-state-${working_directory_clean}"
 
       ## Generates an Terraform plan
       ## An exit code of 0 indicated no changes, 1 a terraform failure, 2 there are pending changes.
