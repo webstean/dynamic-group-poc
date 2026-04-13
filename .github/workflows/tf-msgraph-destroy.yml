@@ -56,7 +56,6 @@ jobs:
             export exitcode=0
             terraform \
               -chdir=.\${{ env.WORKING_DIRECTORY }} init -upgrade -input=false \
-              -backend-config="resource_group_name=${{ secrets.TFSTATE_RESOURCE_GROUP_NAME }}" \
               -backend-config="storage_account_name=${{ secrets.TFSTATE_STORAGE_ACCOUNT_NAME }}" \
               -backend-config="container_name=${{ github.event.repository.name }}" \
               -backend-config="key=tf-state-${{ env.WORKING_DIRECTORY }}"
