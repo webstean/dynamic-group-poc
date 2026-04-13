@@ -81,9 +81,14 @@ jobs:
       ## variables: TFSTATE_RESOURCE_GROUP_NAME, TFSTATE_STORAGE_ACCOUNT_NAME, TFSTATE_CONTAINER_NAME
       - name: 🔍 Terraform Init
         run: |
+            #terraform -chdir=./${{ env.WORKING_DIRECTORY }} init -upgrade -input=false \
+            #  -backend-config="resource_group_name=${{ secrets.TFSTATE_RESOURCE_GROUP_NAME }}" \
+            #  -backend-config="storage_account_name=${{ secrets.TFSTATE_STORAGE_ACCOUNT_NAME }}" \
+            #  -backend-config="container_name=${{ github.event.repository.name }}" \
+            #  -backend-config="key=tf-state-${{ env.WORKING_DIRECTORY }}"
+
             export exitcode=0
             terraform -chdir=./${{ env.WORKING_DIRECTORY }} init -upgrade -input=false \
-              -backend-config="resource_group_name=${{ secrets.TFSTATE_RESOURCE_GROUP_NAME }}" \
               -backend-config="storage_account_name=${{ secrets.TFSTATE_STORAGE_ACCOUNT_NAME }}" \
               -backend-config="container_name=${{ github.event.repository.name }}" \
               -backend-config="key=tf-state-${{ env.WORKING_DIRECTORY }}"
@@ -158,8 +163,14 @@ jobs:
     ## Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: 🔍 Terraform Init
       run: |
+        #terraform -chdir=./${{ env.WORKING_DIRECTORY }} init -upgrade -input=false \
+        # -backend-config="resource_group_name=${{ secrets.TFSTATE_RESOURCE_GROUP_NAME }}" \
+        #  -backend-config="storage_account_name=${{ secrets.TFSTATE_STORAGE_ACCOUNT_NAME }}" \
+        #  -backend-config="container_name=${{ github.event.repository.name }}" \
+        #  -backend-config="key=tf-state-${{ env.WORKING_DIRECTORY }}"
+
+        export exitcode=0
         terraform -chdir=./${{ env.WORKING_DIRECTORY }} init -upgrade -input=false \
-          -backend-config="resource_group_name=${{ secrets.TFSTATE_RESOURCE_GROUP_NAME }}" \
           -backend-config="storage_account_name=${{ secrets.TFSTATE_STORAGE_ACCOUNT_NAME }}" \
           -backend-config="container_name=${{ github.event.repository.name }}" \
           -backend-config="key=tf-state-${{ env.WORKING_DIRECTORY }}"
